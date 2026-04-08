@@ -11,11 +11,11 @@ export default function TabsLayouts() {
             tabBarInactiveTintColor: "#999",
             tabBarStyle: {
                 backgroundColor: "#fff",
-                
+
             },
         }}>
             <Tabs.Screen
-                name="overview"
+                name="index"
                 options={{
                     title: 'Overview',
                     tabBarIcon: ({ color, size }) => (
@@ -36,7 +36,7 @@ export default function TabsLayouts() {
                 name="categoryReports"
                 options={{
                     title: 'Category Reports',
-                                        tabBarIcon: ({ color, size }) => (
+                    tabBarIcon: ({ color, size }) => (
                         <MaterialIcons name="playlist-add-check-circle" size={size} color={color} />
                     ),
                 }}
@@ -45,7 +45,7 @@ export default function TabsLayouts() {
                 name="newEntry"
                 options={{
                     title: 'Add',
-                                        tabBarIcon: ({ color, size }) => (
+                    tabBarIcon: ({ color, size }) => (
                         <Entypo name="new-message" size={size} color={color} />
                     ),
                 }}

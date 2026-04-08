@@ -13,7 +13,7 @@ export default function Layout() {
                 name="(home)"
                 options={{
                     drawerLabel: 'Home',
-                    title: 'Overview',
+                    title: 'Home',
                     drawerIcon: ({ color, size }) => (
                         <AntDesign name="home" size={size} color={color} />
                     )
