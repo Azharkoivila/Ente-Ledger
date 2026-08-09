@@ -1,0 +1,126 @@
+import {
+  DrawerContentScrollView,
+  DrawerItemList,
+} from "@react-navigation/drawer";
+import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import Svg, {
+  Defs,
+  Path,
+  Stop,
+  LinearGradient as SvgGradient,
+} from "react-native-svg";
+import book from "../../assets/imojis/book.webp";
+
+// npm install react-native-svg
+
+const BANNER_HEIGHT = 170;
+
+export default function LedgerDrawerBanner(props: any) {
+  return (
+    <DrawerContentScrollView
+      {...props}
+      contentContainerStyle={{ paddingTop: 0, marginTop: 20 }}
+    >
+      <View style={styles.banner}>
+        <LinearGradient
+          colors={["#0B4F44", "#0F766E", "#14A085"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={StyleSheet.absoluteFill}
+        />
+
+        {/* layered wave sitting at the bottom of the banner */}
+        <Svg
+          width="100%"
+          height={60}
+          viewBox="0 0 400 60"
+          style={styles.wave}
+          preserveAspectRatio="none"
+        >
+          <Defs>
+            <SvgGradient id="waveFade" x1="0" y1="0" x2="1" y2="0">
+              <Stop offset="0" stopColor="#FFFFFF" stopOpacity="0.3" />
+              <Stop offset="1" stopColor="#FFFFFF" stopOpacity="0.12" />
+            </SvgGradient>
+          </Defs>
+          <Path
+            d="M0,30 C80,60 160,0 240,20 C300,35 340,10 400,25 L400,60 L0,60 Z"
+            fill="url(#waveFade)"
+          />
+          <Path
+            d="M0,45 C90,20 170,55 260,35 C320,22 360,45 400,38 L400,60 L0,60 Z"
+            fill="#F7F8FA"
+          />
+        </Svg>
+
+        {/* content */}
+        <View style={styles.center}>
+          <View style={styles.iconBadge}>
+            <Image source={book} style={styles.icon} contentFit="contain" />
+          </View>
+          <Text style={styles.title}>എന്റെ ലെഡ്ജർ</Text>
+          <Text style={styles.subtitle}>നിങ്ങളുടെ ചെലവുകൾ ട്രാക്ക് ചെയ്യൂ</Text>
+        </View>
+      </View>
+
+      <View style={styles.menuWrap}>
+        <DrawerItemList {...props} />
+      </View>
+    </DrawerContentScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  banner: {
+    height: BANNER_HEIGHT,
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+  },
+  wave: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  center: {
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 2,
+  },
+  iconBadge: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: "rgba(255,255,255,0.95)",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 2,
+  },
+  icon: {
+    width: 32,
+    height: 32,
+  },
+  title: {
+    fontSize: 19,
+    fontWeight: "700",
+    color: "#FFFFFF",
+    letterSpacing: 0.2,
+  },
+  subtitle: {
+    fontSize: 12,
+    color: "rgba(255,255,255,0.8)",
+    marginTop: 3,
+  },
+  menuWrap: {
+    paddingTop: 8,
+  },
+});

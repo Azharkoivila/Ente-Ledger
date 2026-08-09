@@ -1,56 +1,35 @@
+import { withObservables } from "@nozbe/watermelondb/react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { useCallback, useRef } from "react";
-import { Animated } from "react-native";
-
-import Add from '../../components/add';
-
-export default function AddNewEntry() {
+import { useCallback } from "react";
+import CategoryRepository from "../../../src/utils/db/repository/categoryRepository";
+import WithAnimation from "../../hoc/withAnimation";
+import TransactionForm from "../../modules/transactionForm";
+const ObservableNewEntry = withObservables([], () => ({
+  categoryList: CategoryRepository.observeCategory(),
+}))(TransactionForm);
+function Entry() {
   const navigation = useNavigation();
-
-  const opacity = useRef(new Animated.Value(0)).current;
-  const translateY = useRef(new Animated.Value(30)).current;
-
   useFocusEffect(
     useCallback(() => {
       const parent = navigation.getParent();
-
       parent?.setOptions({
+        headerLeft: () => null,
         title: "New Entry",
+        swipeEnabled: false,
       });
-
-      opacity.setValue(0);
-      translateY.setValue(30);
-
-      Animated.parallel([
-        Animated.timing(opacity, {
-          toValue: 1,
-          duration: 300,
-          useNativeDriver: true,
-        }),
-        Animated.spring(translateY, {
-          toValue: 0,
-          useNativeDriver: true,
-        }),
-      ]).start();
 
       return () => {
         parent?.setOptions({
-          title: "Home",
+          title: "എന്റെ ലെഡ്ജർ",
+          headerLeft: undefined,
+          swipeEnabled: true,
         });
       };
-    }, [])
+    }, [navigation]),
   );
 
-  return (
-    <Animated.View
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-        opacity,
-        transform: [{ translateY }],
-      }}
-    >
-      <Add/>
-    </Animated.View>
-  );
+  return <ObservableNewEntry />;
 }
+const AddNewEntry = WithAnimation(Entry);
+
+export default AddNewEntry;

@@ -1,0 +1,19 @@
+// src/db/index.ts
+import { Database } from "@nozbe/watermelondb";
+import SQLiteAdapter from "@nozbe/watermelondb/adapters/sqlite";
+import Category from "./model/category";
+import Transaction from "./model/transaction";
+import schema from "./schema";
+
+const adapter = new SQLiteAdapter({
+  schema,
+  jsi: true, // Enables maximum execution speeds over C++
+  onSetUpError: (error) => console.error("DB failed to initialize:", error),
+});
+
+const database = new Database({
+  adapter,
+  modelClasses: [Transaction, Category],
+});
+
+export default database;

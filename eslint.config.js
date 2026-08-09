@@ -7,4 +7,12 @@ module.exports = defineConfig([
   {
     ignores: ['dist/*'],
   },
+  {
+    rules: {
+      "no-console": "warn",
+      "eqeqeq": ["error", "always"],
+      "complexity": ["warn", { "max": 10 }],
+      "camelcase": ["error", { "properties": "always" }]
+    }
+  },
 ]);
