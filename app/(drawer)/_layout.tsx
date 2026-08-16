@@ -38,7 +38,8 @@ export default function Layout() {
           drawerInactiveTintColor: "#6B7280",
           headerTitleStyle: {
             color: "#0F766E",
-            fontFamily: "Nupuram-Calligraphy-Bold", // Distinct color for just this screen
+            fontFamily: "kurumpi-az",
+            fontSize: 40, // Distinct color for just this screen
           },
           drawerLabel: "Home",
           title: "എന്റെ ലെഡ്ജർ",

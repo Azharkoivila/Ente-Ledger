@@ -9,16 +9,8 @@ import {
   FormControlLabelText,
 } from "@/components/ui/form-control";
 import { AlertCircleIcon } from "@/components/ui/icon";
-import { ReactNode } from "react";
+import { CustomFormControllerProps } from "@/src/types";
 
-type ComponentArgs = {
-  Label: string;
-  HelperText: string;
-  WarningText: string;
-  isHelperArea: boolean;
-  isInvalid: boolean;
-  children: ReactNode;
-};
 export default function CustomFormController({
   Label,
   HelperText,
@@ -26,7 +18,7 @@ export default function CustomFormController({
   WarningText,
   children,
   isHelperArea,
-}: ComponentArgs) {
+}: CustomFormControllerProps) {
   return (
     <FormControl
       isRequired

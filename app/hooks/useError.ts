@@ -1,10 +1,11 @@
+import { TransactionError } from "@/src/types";
 import { useState } from "react";
 
-const defaultFormStratus = {
+const defaultFormStratus: TransactionError = {
   category: false,
   amount: false,
   date: false,
-  txnType: false,
+  transactionType: false,
 };
 export default function useError() {
   const [error, setError] = useState(defaultFormStratus);

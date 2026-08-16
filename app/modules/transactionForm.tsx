@@ -1,35 +1,46 @@
 import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
 import { AddIcon } from "@/components/ui/icon";
+import { TransactionFormProps } from "@/src/types";
 import { useFocusEffect } from "@react-navigation/native";
+import dayjs from "dayjs";
 import { router } from "expo-router";
 import { useCallback } from "react";
 import { ScrollView, Text, View } from "react-native";
+import Toast from "react-native-toast-message";
 import {
   createTransaction,
-  getTransactionId,
+  getTransaction,
+  updateTransaction,
 } from "../../src/utils/db/services/transactionService";
-import { formValidate, isanyError } from "../../src/utils/formValidator";
+import {
+  formValidate,
+  isAnyError,
+} from "../../src/utils/validator/formValidator";
 import CustomDatePicker from "../components/datepicker";
 import CustomDropDown from "../components/dropdown";
 import CustomFormController from "../components/formController";
 import CustomInput from "../components/input";
-import CustomTextArea from "../components/inputarea";
-import CustomRadioButton from "../components/radiobtn";
+import CustomTextArea from "../components/inputArea";
+import CustomRadioButton from "../components/radioBtn";
 import { hamdlermdb, handledb } from "../dev/db";
 import useError from "../hooks/useError";
 import useFormKey from "../hooks/useFormKey";
 import useFormReducer from "../hooks/useTransactionForm";
-export default function TransactionForm({ id, categoryList }) {
+export default function TransactionForm({
+  id,
+  categoryList,
+}: TransactionFormProps) {
   const { state, updateForm, resetForm, setForm } = useFormReducer();
   const { keys, resetKeys } = useFormKey(2);
   const { error, setError, removeError } = useError();
-
   useFocusEffect(
     useCallback(() => {
       async function load() {
         if (!id) return;
-        const txn = await getTransactionId(id);
-        setForm(txn, id);
+        const transaction = await getTransaction(id);
+        console.log(transaction.date);
+
+        setForm(transaction, id);
       }
 
       load();
@@ -50,33 +61,39 @@ export default function TransactionForm({ id, categoryList }) {
   );
 
   const handleSubmit = async () => {
-    const resposnse = formValidate(state);
-    setError(resposnse);
-    if (isanyError(resposnse)) {
+    const response = formValidate(state);
+    setError(response);
+    if (isAnyError(response)) {
       return;
     }
     resetForm();
     resetKeys();
     if (state.id) {
       console.log("edit data");
+      updateTransaction(id, state);
+
       router.back();
     } else {
       console.log("submitt");
-      await createTransaction(state);
+      const response = await createTransaction(state);
+      if (response.status) {
+        Toast.show({
+          type: "success",
+          text1: "Success",
+          text2: "Your Transaction Where Added",
+        });
+      } else {
+        Toast.show({
+          type: "error",
+          text1: "Failed",
+          text2: "Your Transaction Where NOT Added TRY AGAIN",
+        });
+      }
     }
   };
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#F7F8FA" }}>
-      <View style={{ paddingHorizontal: 24, paddingTop: 24 }}>
-        <Text style={{ fontSize: 22, fontWeight: "700", color: "#111827" }}>
-          {id ? "Edit transaction" : "New transaction"}
-        </Text>
-        <Text style={{ fontSize: 13, color: "#6B7280", marginTop: 2 }}>
-          {id ? "Update the details below" : "Log a new income or expense"}
-        </Text>
-      </View>
-
       <View
         style={{
           backgroundColor: "#FFFFFF",
@@ -98,7 +115,7 @@ export default function TransactionForm({ id, categoryList }) {
         >
           <CustomDropDown
             values={categoryList}
-            selectedValue={state.category || undefined}
+            selectedValue={state.category}
             onChange={(e) => updateForm(e)}
           />
         </CustomFormController>
@@ -111,7 +128,7 @@ export default function TransactionForm({ id, categoryList }) {
           isInvalid={error.amount && !state.amount ? true : false}
         >
           <CustomInput
-            value={state.amount}
+            value={String(state.amount) == "0" ? "" : String(state.amount)}
             onChange={(e) => updateForm(e)}
             placeholder="₹"
             isNumeric
@@ -127,7 +144,7 @@ export default function TransactionForm({ id, categoryList }) {
           isInvalid={error.date && !state.date ? true : false}
         >
           <CustomDatePicker
-            value={state.date}
+            value={dayjs(state.date).toISOString()}
             onChange={(e) => updateForm(e)}
           />
         </CustomFormController>
@@ -138,10 +155,12 @@ export default function TransactionForm({ id, categoryList }) {
           key={keys[1]}
           WarningText="This field is mandatory"
           isHelperArea={false}
-          isInvalid={error.txnType && !state.txnType ? true : false}
+          isInvalid={
+            error.transactionType && !state.transactionType ? true : false
+          }
         >
           <CustomRadioButton
-            value={state.txnType}
+            value={state.transactionType}
             onChange={(e) => updateForm(e)}
           />
         </CustomFormController>
@@ -156,9 +175,9 @@ export default function TransactionForm({ id, categoryList }) {
           <CustomTextArea
             placeholder="Enter your note"
             isInvalid={false}
-            value={state.notes}
+            value={String(state.note)}
             onChange={(e) => updateForm(e)}
-            isHelperArea={false}
+            isHelperArea
           />
         </CustomFormController>
       </View>
@@ -174,7 +193,7 @@ export default function TransactionForm({ id, categoryList }) {
       >
         <Button
           size="lg"
-          className="rounded-full"
+          className="bg-[#0F766E]"
           style={{ paddingHorizontal: 32, backgroundColor: "#0F766E" }}
           onPress={handleSubmit}
         >

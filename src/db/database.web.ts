@@ -2,7 +2,7 @@ import { Database } from "@nozbe/watermelondb";
 import LokiJSAdapter from "@nozbe/watermelondb/adapters/lokijs";
 import Category from "./model/category";
 import Transaction from "./model/transaction";
-import schema from "./schema";
+import schema from "./schema/schema";
 
 const adapter = new LokiJSAdapter({
   schema,

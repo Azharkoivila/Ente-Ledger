@@ -4,7 +4,7 @@ import { field } from "@nozbe/watermelondb/decorators";
 export default class Category extends Model {
   static table = "category";
 
-  @field("category_id") category_id;
-  @field("cat_name") cat_name;
-  @field("cat_value") cat_value;
+  @field("category_id") categoryId!: string;
+  @field("category_name") categoryName!: string;
+  @field("category_value") categoryValue!: string;
 }

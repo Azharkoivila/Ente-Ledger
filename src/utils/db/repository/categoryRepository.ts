@@ -2,9 +2,9 @@ import database from "@/src/db/database";
 
 // indexing need <---
 
-export class CategoryRepository {
+class CategoryRepository {
   observeCategory() {
-    return database.get("category").query().observe();
+    return database.get("category").query().observe(); //!change to observe coloumn and remove key
   }
 }
 

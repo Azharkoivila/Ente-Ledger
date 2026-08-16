@@ -12,12 +12,11 @@ import Svg, {
   Stop,
   LinearGradient as SvgGradient,
 } from "react-native-svg";
-import book from "../../assets/imojis/book.webp";
 
 // npm install react-native-svg
 
 const BANNER_HEIGHT = 170;
-
+const TypedDefs = Defs as any;
 export default function LedgerDrawerBanner(props: any) {
   return (
     <DrawerContentScrollView
@@ -37,15 +36,15 @@ export default function LedgerDrawerBanner(props: any) {
           width="100%"
           height={60}
           viewBox="0 0 400 60"
-          style={styles.wave}
+          style={[styles.wave]}
           preserveAspectRatio="none"
         >
-          <Defs>
+          <TypedDefs>
             <SvgGradient id="waveFade" x1="0" y1="0" x2="1" y2="0">
               <Stop offset="0" stopColor="#FFFFFF" stopOpacity="0.3" />
               <Stop offset="1" stopColor="#FFFFFF" stopOpacity="0.12" />
             </SvgGradient>
-          </Defs>
+          </TypedDefs>
           <Path
             d="M0,30 C80,60 160,0 240,20 C300,35 340,10 400,25 L400,60 L0,60 Z"
             fill="url(#waveFade)"
@@ -59,10 +58,14 @@ export default function LedgerDrawerBanner(props: any) {
         {/* content */}
         <View style={styles.center}>
           <View style={styles.iconBadge}>
-            <Image source={book} style={styles.icon} contentFit="contain" />
+            <Image
+              source={require("@/assets/images/iconG.png")}
+              style={styles.icon}
+              contentFit="contain"
+            />
           </View>
           <Text style={styles.title}>എന്റെ ലെഡ്ജർ</Text>
-          <Text style={styles.subtitle}>നിങ്ങളുടെ ചെലവുകൾ ട്രാക്ക് ചെയ്യൂ</Text>
+          <Text style={styles.subtitle}>ആറ്റില്‍ കളഞ്ഞാലും അളന്നു കളയണം !</Text>
         </View>
       </View>
 
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
   iconBadge: {
     width: 60,
     height: 60,
-    borderRadius: 30,
+    borderRadius: 15,
     backgroundColor: "rgba(255,255,255,0.95)",
     alignItems: "center",
     justifyContent: "center",
@@ -106,19 +109,19 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   icon: {
-    width: 32,
-    height: 32,
+    width: 60,
+    height: 60,
   },
   title: {
-    fontSize: 19,
-    fontWeight: "700",
+    fontSize: 25,
     color: "#FFFFFF",
-    letterSpacing: 0.2,
+    fontFamily: "chilanka-az",
   },
   subtitle: {
-    fontSize: 12,
+    fontSize: 15,
     color: "rgba(255,255,255,0.8)",
-    marginTop: 3,
+    fontFamily: "chilanka-az",
+    paddingBottom: 15,
   },
   menuWrap: {
     paddingTop: 8,

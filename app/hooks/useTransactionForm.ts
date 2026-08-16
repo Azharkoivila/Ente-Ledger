@@ -1,14 +1,25 @@
+import Transaction from "@/src/db/model/transaction";
+import { FormAction, TransactionData } from "@/src/types";
 import { useReducer } from "react";
-import { updateDispatch } from "../../src/utils/db/services/transactionService";
-const initialState = {
+const initialState: TransactionData = {
   category: "",
-  amount: "",
-  date: "",
-  txnType: "income",
-  notes: "",
+  amount: 0,
+  date: Date.now(),
+  transactionType: "income",
+  note: "",
 };
+function updateDispatch(transaction: TransactionData, id: string) {
+  return {
+    category: transaction.category,
+    amount: Number(transaction.amount),
+    date: Number(transaction.date),
+    transactionType: transaction.transactionType,
+    note: transaction.note,
+    id,
+  };
+}
 
-const formReducer = (state, action) => {
+const formReducer = (state: TransactionData, action: FormAction) => {
   switch (action.type) {
     case "UPDATE_FIELD":
       return {
@@ -29,21 +40,24 @@ const formReducer = (state, action) => {
 
 export default function useFormReducer() {
   const [state, dispatch] = useReducer(formReducer, initialState);
-  function updateForm(e) {
+  function updateForm(e: any) {
+    if (!e?.name && !e?.value) {
+      return;
+    }
     dispatch({
       type: "UPDATE_FIELD",
-      field: e.name,
-      value: e.value,
+      field: e?.name,
+      value: e?.value,
     });
   }
   function resetForm() {
-    dispatch({ type: "RESET_FORM" }); //! memmorixe it
+    dispatch({ type: "RESET_FORM" }); //! memorize it
   }
 
-  function setForm(txn, id) {
+  function setForm(transaction: Transaction, id: string) {
     dispatch({
       type: "UPDATE_FORM",
-      payload: updateDispatch(txn, id),
+      payload: updateDispatch(transaction, id),
     });
   }
 

@@ -10,16 +10,22 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@/components/ui/modal";
+import { CustomDatePickerProps } from "@/src/types";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { View } from "react-native";
-import DateTimePicker, { useDefaultStyles } from "react-native-ui-datepicker";
+import DateTimePicker, {
+  DateType,
+  useDefaultStyles,
+} from "react-native-ui-datepicker";
 
-export default function CustomDatePicker({ value, onChange }) {
+export default function CustomDatePicker({
+  value,
+  onChange,
+}: CustomDatePickerProps) {
   const defaultStyles = useDefaultStyles();
   const [selected, setSelected] = useState<DateType>();
   const [showModal, setShowModal] = useState(false);
-  const date = value ? dayjs(value) : null;
   return (
     <View
       style={{
@@ -29,11 +35,9 @@ export default function CustomDatePicker({ value, onChange }) {
       <Button
         onPress={() => setShowModal(true)}
         size="lg"
-        className="rounded-full"
+        className="bg-[#0F766E]"
       >
-        <ButtonText>
-          {date?.isValid() ? date.format("DD/MMMM/YYYY") : "Choose"}
-        </ButtonText>
+        <ButtonText>{dayjs(value).format("DD/MM/YYYY")}</ButtonText>
       </Button>
       <Modal
         isOpen={showModal}
@@ -73,6 +77,7 @@ export default function CustomDatePicker({ value, onChange }) {
               <ButtonText>Cancel</ButtonText>
             </Button>
             <Button
+              className="bg=[#0F766E]"
               onPress={() => {
                 setShowModal(false);
               }}

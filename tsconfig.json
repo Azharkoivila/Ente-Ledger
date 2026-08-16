@@ -1,15 +1,15 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "target": "ES2021",
+    "useDefineForClassFields": false,
+    "experimentalDecorators": true,
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "tailwind.config": [
-        "./tailwind.config.js"
-      ]
-    }
+      "@/*": ["./*"],
+      "tailwind.config": ["./tailwind.config.js"]
+    },
+    "moduleSuffixes": [".native", ".ios", ".android", ".web", ""]
   },
   "include": [
     "**/*.ts",

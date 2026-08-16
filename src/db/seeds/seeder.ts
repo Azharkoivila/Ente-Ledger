@@ -18,9 +18,9 @@ export async function seedDatabaseIfNeeded(database: Database): Promise<void> {
 
       const prepareOperations = DEFAULT_CATEGORIES.map((category) =>
         categoryCollection.prepareCreate((record: any) => {
-          record.category_id = category.category_id; // Force fixed IDs to guarantee consistency
-          record.cat_name = category.cat_name;
-          record.cat_value = category.cat_value;
+          record.categoryId = category.categoryId; // Force fixed IDs to guarantee consistency
+          record.categoryName = category.categoryName;
+          record.categoryValue = category.categoryValue;
 
           // CRITICAL: Avoid pushing local seed templates up to backend servers during sync
           record._raw.syncStatus = "synced";

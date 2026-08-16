@@ -1,4 +1,5 @@
 import database from "@/src/db/database";
+import Transaction from "@/src/db/model/transaction";
 import { Q } from "@nozbe/watermelondb";
 import dayjs from "dayjs";
 
@@ -20,25 +21,25 @@ const monthEnd = dayjs().endOf("month").valueOf();
 export class TransactionRepository {
   observeRange(start: number, end: number) {
     return database
-      .get("transactions")
+      .get<Transaction>("transactions")
       .query(
         Q.where("date", Q.gte(start)),
         Q.where("date", Q.lt(end)),
         Q.sortBy("date", Q.asc),
       )
-      .observe();
+      .observeWithColumns(["amount", "category", "date", "transaction_type"]);
   }
   observeMonth() {
     return database
-      .get("transactions")
+      .get<Transaction>("transactions")
       .query(
         Q.where("date", Q.gte(monthStart)),
         Q.where("date", Q.lt(monthEnd)),
         Q.sortBy("date", Q.asc),
       )
-      .observe();
+      .observeWithColumns(["amount", "category", "date", "transaction_type"]);
   }
-  obseerveRangeWithCategery(start, end, category) {
+  observeRangeWithCategory(start: number, end: number, category: string) {
     return database
       .get("transactions")
       .query(
@@ -47,7 +48,7 @@ export class TransactionRepository {
         Q.where("category", category),
         Q.sortBy("date", Q.asc),
       )
-      .observe();
+      .observeWithColumns(["amount", "category", "date", "transaction_type"]);
   }
 }
 

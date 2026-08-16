@@ -19,7 +19,6 @@ function Overview() {
       };
     }, []),
   );
-
   return (
     <View className="px-3 pt-3" style={{ flex: 1 }}>
       <ObservableOverview />

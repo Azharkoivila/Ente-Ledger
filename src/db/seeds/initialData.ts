@@ -1,13 +1,13 @@
 import * as Crypto from "expo-crypto";
 export const DEFAULT_CATEGORIES = [
   {
-    category_id: Crypto.randomUUID(),
-    cat_name: "SALARY",
-    cat_value: "salary",
+    categoryId: Crypto.randomUUID(),
+    categoryName: "SALARY",
+    categoryValue: "salary",
   },
   {
-    category_id: Crypto.randomUUID(),
-    cat_name: "EMI",
-    cat_value: "emi",
+    categoryId: Crypto.randomUUID(),
+    categoryName: "EMI",
+    categoryValue: "emi",
   },
 ];

@@ -12,33 +12,40 @@ import {
   SelectScrollView,
   SelectTrigger,
 } from "@/components/ui/select";
-
-type CategoryItem = {
-  label: string;
-  value: string;
-};
-
-type Props = {
-  values: CategoryItem[];
-  onChange: (value: object) => void;
-  selectedValue?: string; // ← add this prop
-};
+import { CustomDropDownProps } from "@/src/types";
+import { useState } from "react";
 
 export default function CustomDropDown({
   values,
   onChange,
   selectedValue,
-}: Props) {
+}: CustomDropDownProps) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   return (
     <Select
       selectedValue={selectedValue ? selectedValue : undefined}
+      onOpen={() => setIsOpen(true)}
+      onClose={() => setIsOpen(false)}
       onValueChange={(e) => {
         onChange({ name: "category", value: e });
+        setIsOpen(false);
       }}
     >
-      <SelectTrigger variant="rounded" size="xl">
+      <SelectTrigger
+        size="xl"
+        style={{
+          borderWidth: isOpen ? 1.5 : 1,
+          borderColor: isOpen ? "#0F766E" : "#E5E7EB",
+          backgroundColor: isOpen ? "#F0FDFA" : "#FFFFFF",
+        }}
+      >
         <SelectInput placeholder="Select option" className="flex-1" />
-        <SelectIcon className="mr-3" as={ChevronDownIcon} />
+        <SelectIcon
+          className="mr-3"
+          as={ChevronDownIcon}
+          color={isOpen ? "#0F766E" : "#9CA3AF"}
+        />
       </SelectTrigger>
       <SelectPortal>
         <SelectBackdrop />
@@ -47,12 +54,12 @@ export default function CustomDropDown({
             <SelectDragIndicator />
           </SelectDragIndicatorWrapper>
           <SelectScrollView>
-            {values.map(({ _raw }) => (
+            {values.map((item) => (
               <SelectItem
-                key={_raw.id}
-                label={_raw.cat_name}
-                value={_raw.cat_value}
-              /> // ← key by value, not index
+                key={item.id}
+                label={item.categoryName}
+                value={item.categoryValue}
+              />
             ))}
           </SelectScrollView>
         </SelectContent>

@@ -1,13 +1,6 @@
 import { Input, InputField } from "@/components/ui/input";
+import { CustomInputProps } from "@/src/types";
 import { View } from "react-native";
-
-type Props = {
-  value: number;
-  isNumeric: boolean;
-  placeholder: string;
-  usedFor: string;
-  onChange: (value: string) => void;
-};
 
 export default function CustomInput({
   value,
@@ -15,11 +8,10 @@ export default function CustomInput({
   isNumeric,
   placeholder,
   usedFor,
-}: Props) {
+}: CustomInputProps) {
   return (
     <View>
       <Input
-        variant="rounded"
         size="xl"
         isDisabled={false}
         isInvalid={false}

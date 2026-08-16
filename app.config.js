@@ -1,13 +1,11 @@
 const isDev = process.env.APP_VARIANT === "development";
-console.log(isDev);
-
 export default {
   expo: {
     name: "Ente Ledger",
     slug: "ente-ledger",
     version: "1.0.0",
     orientation: "portrait",
-    icon: "./assets/images/icon.png",
+    icon: "./assets/images/iconG.png",
     scheme: "enteledger",
     userInterfaceStyle: "automatic",
     newArchEnabled: true,
@@ -17,14 +15,18 @@ export default {
         ? "com.azharkoivila.enteledger.dev"
         : "com.azharkoivila.enteledger",
     },
+    androidNavigationBar: {
+      backgroundColor: "#000000",
+      barStyle: "light-content",
+    },
     android: {
       adaptiveIcon: {
         backgroundColor: "#E6F4FE",
-        foregroundImage: "./assets/images/android-icon-foreground.png",
-        backgroundImage: "./assets/images/android-icon-background.png",
-        monochromeImage: "./assets/images/android-icon-monochrome.png",
+        foregroundImage: "./assets/images/iconG.png",
+        backgroundImage: "./assets/images/iconG.png",
+        monochromeImage: "./assets/images/iconG.png",
       },
-      edgeToEdgeEnabled: true,
+      edgeToEdgeEnabled: false,
       predictiveBackGestureEnabled: false,
       package: isDev
         ? "com.azharkoivila.enteledger.dev"
@@ -39,10 +41,9 @@ export default {
       [
         "expo-splash-screen",
         {
-          image: "./assets/images/splash-icon.png",
-          imageWidth: 200,
-          resizeMode: "contain",
-          backgroundColor: "#ffffff",
+          image: "./assets/images/spashG.png",
+          resizeMode: "cover",
+          backgroundColor: "#000000",
           dark: {
             backgroundColor: "#000000",
           },
