@@ -1,6 +1,7 @@
 import database from "@/src/db/database";
 import Transaction from "@/src/db/model/transaction";
 import { Q } from "@nozbe/watermelondb";
+import { map } from "@nozbe/watermelondb/utils/rx";
 import dayjs from "dayjs";
 
 // export default async function getWeek({ start, end }) {
@@ -13,7 +14,16 @@ import dayjs from "dayjs";
 //     .fetch();
 //   console.log(transactions);
 // }
-
+function toDTO(record: Transaction) {
+  return {
+    id: record.id,
+    amount: record.amount,
+    category: record.category,
+    date: record.date,
+    transactionType: record.transactionType,
+    note: record.note,
+  };
+}
 // indexing need <---
 const monthStart = dayjs().startOf("month").valueOf();
 const monthEnd = dayjs().endOf("month").valueOf();
@@ -27,7 +37,8 @@ export class TransactionRepository {
         Q.where("date", Q.lt(end)),
         Q.sortBy("date", Q.asc),
       )
-      .observeWithColumns(["amount", "category", "date", "transaction_type"]);
+      .observeWithColumns(["amount", "category", "date", "transaction_type"])
+      .pipe(map((record) => record.map(toDTO)));
   }
   observeMonth() {
     return database
@@ -41,14 +52,15 @@ export class TransactionRepository {
   }
   observeRangeWithCategory(start: number, end: number, category: string) {
     return database
-      .get("transactions")
+      .get<Transaction>("transactions")
       .query(
         Q.where("date", Q.gte(start)),
         Q.where("date", Q.lt(end)),
         Q.where("category", category),
         Q.sortBy("date", Q.asc),
       )
-      .observeWithColumns(["amount", "category", "date", "transaction_type"]);
+      .observeWithColumns(["amount", "category", "date", "transaction_type"])
+      .pipe(map((record) => record.map(toDTO)));
   }
 }
 

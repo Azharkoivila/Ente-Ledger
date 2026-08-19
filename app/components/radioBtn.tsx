@@ -22,6 +22,8 @@ export default function CustomRadioButton({
       <RadioGroup
         value={value}
         onChange={(e) => {
+          console.log(e);
+
           onChange({ name: "transactionType", value: e });
         }}
         style={{

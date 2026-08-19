@@ -37,9 +37,8 @@ export default function TransactionForm({
     useCallback(() => {
       async function load() {
         if (!id) return;
+        resetKeys();
         const transaction = await getTransaction(id);
-        console.log(transaction.date);
-
         setForm(transaction, id);
       }
 
@@ -70,11 +69,11 @@ export default function TransactionForm({
     resetKeys();
     if (state.id) {
       console.log("edit data");
-      updateTransaction(id, state);
-
+      await updateTransaction(id, state);
+      resetKeys();
       router.back();
     } else {
-      console.log("submitt");
+      console.log("submit");
       const response = await createTransaction(state);
       if (response.status) {
         Toast.show({

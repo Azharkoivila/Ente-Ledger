@@ -7,8 +7,7 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { Text } from "@/components/ui/text";
-import Transaction from "@/src/db/model/transaction";
-import { FListProps, TransactionRowProps } from "@/src/types";
+import { FListProps, TransactionData, TransactionRowProps } from "@/src/types";
 import Feather from "@expo/vector-icons/Feather";
 import { FlashList } from "@shopify/flash-list";
 import dayjs from "dayjs";
@@ -35,7 +34,7 @@ const TransactionRow = memo(function TransactionRow({
         <TouchableOpacity
           {...triggerProps}
           activeOpacity={0.7}
-          onPress={() => onPress(item)}
+          onPress={() => onPress(item.id!)}
           onLongPress={() => onLongPress(item)}
         >
           <View className="bg-background-0 flex-row items-center my-1 p-3 rounded-2xl border border-outline-200">
@@ -113,18 +112,18 @@ function FList({ transactions }: FListProps) {
   const [openItemId, setOpenItemId] = useState<string | number | null>(null);
 
   const handlePress = useCallback(
-    (item: Transaction) => {
+    (id: string) => {
       router.push({
         pathname: "/modules/(edit)/[id]",
-        params: { id: item.id },
+        params: { id },
       });
     },
     [router],
   );
 
-  const handleLongPress = useCallback((item: Transaction) => {
+  const handleLongPress = useCallback((item: TransactionData) => {
     Vibration.vibrate(15);
-    setOpenItemId(item.id);
+    setOpenItemId(item.id!);
   }, []);
 
   const handleClosePopover = useCallback(() => {
@@ -152,16 +151,16 @@ function FList({ transactions }: FListProps) {
       <Text
         style={{
           fontSize: 20,
-          fontWeight: "bold",
           marginTop: 3,
           marginBottom: 3,
+          fontFamily: "ubuntu-Regular",
         }}
       >
         Transactions
       </Text>
       <FlashList
         data={transactions}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.id!.toString()}
         renderItem={({ item }) => (
           <TransactionRow
             item={item}

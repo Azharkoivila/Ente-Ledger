@@ -23,7 +23,7 @@ export interface CategoryReportsProps {
 }
 
 export interface ReportScreenProps {
-  transactions: readonly Transaction[];
+  transactions: readonly TransactionData[];
   calender: Dispatch<SetStateAction<CalendarFilter>>;
   start: number;
   end: number;
@@ -35,7 +35,7 @@ export interface CategoryFListProps {
 }
 
 export interface FListProps {
-  transactions: readonly Transaction[];
+  transactions: readonly TransactionData[];
 }
 
 export interface TransactionError {
@@ -149,7 +149,7 @@ export interface CustomPieChartProps {
 }
 
 export interface PrintContainerProps {
-  transactions: readonly Transaction[];
+  transactions: readonly TransactionData[];
   summery: Summary;
 }
 
@@ -164,7 +164,7 @@ export interface TransactionFormProps {
 }
 
 export interface TransactionRowProps {
-  item: Transaction;
+  item: TransactionData;
   isPopoverOpen: boolean;
   onPress: (item: Transaction) => void;
   onLongPress: (item: Transaction) => void;

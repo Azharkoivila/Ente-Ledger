@@ -20,8 +20,16 @@ export default function RootLayout() {
   const [loaded, error] = useFonts({
     //! remove when final build
     "Nupuram-Calligraphy-Bold": require("../assets/fonts/ttf/Nupuram-Calligraphy-Bold.ttf"),
-    "chilanka-az": require("@/assets/fonts/Chilanka-Regular.ttf"),
-    "kurumpi-az": require("@/assets/fonts/Karumbi-Regular.ttf"),
+    "chilanka-az": require("@/assets/fonts/malayalam/Chilanka-Regular.ttf"),
+    "kurumpi-az": require("@/assets/fonts/malayalam/Karumbi-Regular.ttf"),
+    "ubuntu-Bold": require("@/assets/fonts/ubuntu/Ubuntu-Bold.ttf"),
+    "ubuntu-BoldItalic": require("@/assets/fonts/ubuntu/Ubuntu-BoldItalic.ttf"),
+    "ubuntu-Italic": require("@/assets/fonts/ubuntu/Ubuntu-Italic.ttf"),
+    "ubuntu-Light": require("@/assets/fonts/ubuntu/Ubuntu-Light.ttf"),
+    "ubuntu-LightItalic": require("@/assets/fonts/ubuntu/Ubuntu-LightItalic.ttf"),
+    "ubuntu-Medium": require("@/assets/fonts/ubuntu/Ubuntu-Medium.ttf"),
+    "ubuntu-MediumItalic": require("@/assets/fonts/ubuntu/Ubuntu-MediumItalic.ttf"),
+    "ubuntu-Regular": require("@/assets/fonts/ubuntu/Ubuntu-Regular.ttf"),
   });
 
   useEffect(() => {

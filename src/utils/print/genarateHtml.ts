@@ -1,3 +1,4 @@
+//! a bug detetected when minus value is frist Transaction
 export default function calculate(txn, summery) {
   let balance = 0;
   const ledgerHtml = `<!DOCTYPE html>
@@ -240,17 +241,17 @@ export default function calculate(txn, summery) {
       </thead>
       <tbody>
         ${txn
-          .map((transction, no) => {
-            if (transction.txn_type === "income") {
-              balance = +transction.amount;
+          .map((transaction, no) => {
+            if (transaction.transactionType === "income") {
+              balance = +transaction.amount;
             } else {
-              balance -= transction.amount;
+              balance -= transaction.amount;
             }
             return `<tr>
           <td class="item-cell">${no + 1}</td>
-          <td class="item-cell">${transction.category.toUpperCase()}<span class="tag">${transction.note.toUpperCase()}</span></td>
-          <td class=${transction.txn_type === "expense" ? '"num debit"' : '"num muted"'}>${transction.txn_type === "expense" ? `₹ ${transction.amount}` : "&mdash;"}</td>
-          <td class=${transction.txn_type === "income" ? '"num credit"' : '"num muted"'}>${transction.txn_type === "income" ? `₹ ${transction.amount}` : "&mdash;"}</td>
+          <td class="item-cell">${transaction.category.toUpperCase()}<span class="tag">${transaction.note.toUpperCase()}</span></td>
+          <td class=${transaction.transactionType === "expense" ? '"num debit"' : '"num muted"'}>${transaction.transactionType === "expense" ? `₹ ${transaction.amount}` : "&mdash;"}</td>
+          <td class=${transaction.transactionType === "income" ? '"num credit"' : '"num muted"'}>${transaction.transactionType === "income" ? `₹ ${transaction.amount}` : "&mdash;"}</td>
           <td class="num balance"> ₹ ${balance}</td>
         </tr>`;
           })
