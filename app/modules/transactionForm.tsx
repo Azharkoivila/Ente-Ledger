@@ -22,7 +22,7 @@ import CustomFormController from "../components/formController";
 import CustomInput from "../components/input";
 import CustomTextArea from "../components/inputArea";
 import CustomRadioButton from "../components/radioBtn";
-import { hamdlermdb, handledb } from "../dev/db";
+import { hamdlermdb, handledb, handlenotes } from "../dev/db";
 import useError from "../hooks/useError";
 import useFormKey from "../hooks/useFormKey";
 import useFormReducer from "../hooks/useTransactionForm";
@@ -229,6 +229,10 @@ export default function TransactionForm({
           </Button>
           <Button size="sm" className="rounded-full mt-3" onPress={hamdlermdb}>
             <ButtonText>rm Db</ButtonText>
+            <ButtonIcon as={AddIcon} className="ml-2" />
+          </Button>
+          <Button size="sm" className="rounded-full mt-3" onPress={handlenotes}>
+            <ButtonText>show Notes</ButtonText>
             <ButtonIcon as={AddIcon} className="ml-2" />
           </Button>
         </View>

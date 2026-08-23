@@ -19,7 +19,6 @@ export default function RootLayout() {
   const [isReady, setIsReady] = useState(false);
   const [loaded, error] = useFonts({
     //! remove when final build
-    "Nupuram-Calligraphy-Bold": require("../assets/fonts/ttf/Nupuram-Calligraphy-Bold.ttf"),
     "chilanka-az": require("@/assets/fonts/malayalam/Chilanka-Regular.ttf"),
     "kurumpi-az": require("@/assets/fonts/malayalam/Karumbi-Regular.ttf"),
     "ubuntu-Bold": require("@/assets/fonts/ubuntu/Ubuntu-Bold.ttf"),

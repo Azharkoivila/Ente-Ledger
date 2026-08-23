@@ -1,3 +1,15 @@
+import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
+import { Heading } from "@/components/ui/heading";
+import { ArrowLeftIcon } from "@/components/ui/icon";
+import { Input, InputField } from "@/components/ui/input";
+import {
+  Modal,
+  ModalBackdrop,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/ui/modal";
 import { flushTransactions } from "@/src/utils/db/services/transactionService";
 import storageService from "@/src/utils/storage/storageService";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -111,6 +123,11 @@ export default function SettingsScreen() {
   const [notifications, setNotifications] = useState(true);
   const [biometricLock, setBiometricLock] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+
+  //mmodel
+  const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
+  const [showModal3, setShowModal3] = useState(false);
   useEffect(() => {
     async function loadSettings() {
       try {
@@ -152,54 +169,80 @@ export default function SettingsScreen() {
   };
 
   return (
-    <ScrollView
-      style={{ flex: 1, backgroundColor: "#F7F8FA" }}
-      contentContainerStyle={{ paddingBottom: 40 + insets.bottom }}
-    >
-      <View style={{ paddingTop: 20, paddingHorizontal: 20, marginBottom: 20 }}>
-        <Text
-          style={{ fontSize: 22, fontFamily: "Jakarta-Bold", color: "#111827" }}
+    <>
+      <ScrollView
+        style={{ flex: 1, backgroundColor: "#F7F8FA" }}
+        contentContainerStyle={{ paddingBottom: 40 + insets.bottom }}
+      >
+        <View
+          style={{ paddingTop: 20, paddingHorizontal: 20, marginBottom: 20 }}
         >
-          Settings
-        </Text>
-        <Text
-          style={{
-            fontSize: 13,
-            fontFamily: "Jakarta-Regular",
-            color: "#6B7280",
-            marginTop: 2,
-          }}
-        >
-          Manage your preferences and data
-        </Text>
-      </View>
+          <Text
+            style={{
+              fontSize: 22,
+              fontFamily: "Jakarta-Bold",
+              color: "#111827",
+            }}
+          >
+            Settings
+          </Text>
+          <Text
+            style={{
+              fontSize: 13,
+              fontFamily: "Jakarta-Regular",
+              color: "#6B7280",
+              marginTop: 2,
+            }}
+          >
+            Manage your preferences and data
+          </Text>
+        </View>
 
-      {/* Preferences */}
-      <View style={{ marginHorizontal: 16, marginBottom: 20 }}>
-        <SectionHeader label="Preferences" />
-        <Card>
-          <Row
-            icon={<Feather name="dollar-sign" size={16} color="#0F766E" />}
-            label="Currency"
-            sublabel="Now only Support Indian Rupee"
-            onPress={() => {}}
-            right={
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Text
-                  style={{
-                    fontSize: 13,
-                    fontFamily: "PlexMono-Medium",
-                    color: "#6B7280",
-                    marginRight: 4,
-                  }}
-                >
-                  ₹ INR
-                </Text>
-                <Feather name="chevron-right" size={16} color="#9CA3AF" />
-              </View>
-            }
-          />
-          {/* <Row
+        {/* Preferences */}
+        <View style={{ marginHorizontal: 16, marginBottom: 20 }}>
+          <SectionHeader label="Preferences" />
+          <Card>
+            <Row
+              icon={<Feather name="dollar-sign" size={16} color="#0F766E" />}
+              label="Currency"
+              sublabel="Now only Support Indian Rupee"
+              onPress={() => {}}
+              right={
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      fontFamily: "PlexMono-Medium",
+                      color: "#6B7280",
+                      marginRight: 4,
+                    }}
+                  >
+                    ₹ INR
+                  </Text>
+                  <Feather name="chevron-right" size={16} color="#9CA3AF" />
+                </View>
+              }
+            />
+            <Row
+              icon={<Feather name="user" size={16} color="#0F766E" />}
+              label="User Name"
+              sublabel="Set UserName"
+              onPress={() => setShowModal(true)}
+              right={
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      fontFamily: "PlexMono-Medium",
+                      color: "#6B7280",
+                      marginRight: 4,
+                    }}
+                  ></Text>
+                  <Feather name="chevron-right" size={16} color="#9CA3AF" />
+                </View>
+              }
+            />
+            {/* <Row
             icon={<Feather name="moon" size={16} color="#0F766E" />}
             label="Dark mode"
             sublabel="Match system appearance"
@@ -227,35 +270,35 @@ export default function SettingsScreen() {
               />
             }
           /> */}
-        </Card>
-      </View>
+          </Card>
+        </View>
 
-      {/* Security */}
-      <View style={{ marginHorizontal: 16, marginBottom: 20 }}>
-        <SectionHeader label="Security" />
-        <Card>
-          <Row
-            icon={<Feather name="lock" size={16} color="#0F766E" />}
-            label="Biometric lock"
-            sublabel="Require Face ID / fingerprint to open"
-            isLast
-            right={
-              <Switch
-                value={biometricLock}
-                onValueChange={handleBiometric}
-                trackColor={{ false: "#E5E7EB", true: "#99F6E4" }}
-                thumbColor={biometricLock ? "#0F766E" : "#FFFFFF"}
-              />
-            }
-          />
-        </Card>
-      </View>
+        {/* Security */}
+        <View style={{ marginHorizontal: 16, marginBottom: 20 }}>
+          <SectionHeader label="Security" />
+          <Card>
+            <Row
+              icon={<Feather name="lock" size={16} color="#0F766E" />}
+              label="Biometric lock"
+              sublabel="Require Face ID / fingerprint to open"
+              isLast
+              right={
+                <Switch
+                  value={biometricLock}
+                  onValueChange={handleBiometric}
+                  trackColor={{ false: "#E5E7EB", true: "#99F6E4" }}
+                  thumbColor={biometricLock ? "#0F766E" : "#FFFFFF"}
+                />
+              }
+            />
+          </Card>
+        </View>
 
-      {/* Data */}
-      <View style={{ marginHorizontal: 16, marginBottom: 20 }}>
-        <SectionHeader label="Data" />
-        <Card>
-          {/* <Row
+        {/* Data */}
+        <View style={{ marginHorizontal: 16, marginBottom: 20 }}>
+          <SectionHeader label="Data" />
+          <Card>
+            {/* <Row
             icon={<Feather name="download" size={16} color="#0F766E" />}
             label="Export as CSV"
             sublabel="Download all transactions"
@@ -269,47 +312,196 @@ export default function SettingsScreen() {
             onPress={() => {}}
             right={<Feather name="chevron-right" size={16} color="#9CA3AF" />}
           /> */}
-          <Row
-            icon={<Feather name="folder" size={16} color="#0F766E" />}
-            label="Manage categories"
-            onPress={() => router.push("/(drawer)/categoriesDrawer")}
-            isLast
-            right={<Feather name="chevron-right" size={16} color="#9CA3AF" />}
-          />
-        </Card>
-      </View>
+            <Row
+              icon={<Feather name="folder" size={16} color="#0F766E" />}
+              label="Manage categories"
+              onPress={() => router.push("/(drawer)/categoriesDrawer")}
+              isLast
+              right={<Feather name="chevron-right" size={16} color="#9CA3AF" />}
+            />
+          </Card>
+        </View>
 
-      {/* About link */}
-      <View style={{ marginHorizontal: 16, marginBottom: 20 }}>
-        <SectionHeader label="Support" />
-        <Card>
-          <Row
-            icon={<Feather name="info" size={16} color="#0F766E" />}
-            label="About Ente Ledger"
-            sublabel="Version, license, source"
-            onPress={() => router.push("/(drawer)/aboutDrawer")}
-            isLast
-            right={<Feather name="chevron-right" size={16} color="#9CA3AF" />}
-          />
-        </Card>
-      </View>
+        {/* About link */}
+        <View style={{ marginHorizontal: 16, marginBottom: 20 }}>
+          <SectionHeader label="Support" />
+          <Card>
+            <Row
+              icon={<Feather name="info" size={16} color="#0F766E" />}
+              label="About Ente Ledger"
+              sublabel="Version, license, source"
+              onPress={() => router.push("/(drawer)/aboutDrawer")}
+              isLast
+              right={<Feather name="chevron-right" size={16} color="#9CA3AF" />}
+            />
+          </Card>
+        </View>
 
-      {/* Danger zone */}
-      <View style={{ marginHorizontal: 16 }}>
-        <SectionHeader label="Danger zone" />
-        <Card>
-          <Row
-            icon={<AntDesign name="delete" size={15} color="#DC2626" />}
-            tint="#FEF2F2"
-            label="Delete all data"
-            sublabel="Permanently erase every transaction"
-            onPress={handleClearData}
-            danger
-            isLast
-            right={<Feather name="chevron-right" size={16} color="#FCA5A5" />}
-          />
-        </Card>
-      </View>
-    </ScrollView>
+        {/* Danger zone */}
+        <View style={{ marginHorizontal: 16 }}>
+          <SectionHeader label="Danger zone" />
+          <Card>
+            <Row
+              icon={<AntDesign name="delete" size={15} color="#DC2626" />}
+              tint="#FEF2F2"
+              label="Delete all data"
+              sublabel="Permanently erase every transaction"
+              onPress={handleClearData}
+              danger
+              isLast
+              right={<Feather name="chevron-right" size={16} color="#FCA5A5" />}
+            />
+          </Card>
+        </View>
+      </ScrollView>
+      <Modal
+        isOpen={showModal}
+        onClose={() => {
+          setShowModal(false);
+        }}
+      >
+        <ModalBackdrop />
+        <ModalContent>
+          <ModalHeader className="flex-col items-start gap-0.5">
+            <Heading>Set User Name ?</Heading>
+            <Text size="sm">Set name Will shows on your transaction PDF</Text>
+          </ModalHeader>
+          <ModalBody className="mb-4">
+            <Input>
+              <InputField
+                onChange={(e) => console.log(e.nativeEvent.text)}
+                placeholder="Enter your Name"
+              />
+            </Input>
+          </ModalBody>
+          <ModalFooter className="flex-col items-start">
+            <Button
+              onPress={() => {
+                console.log("username set action");
+
+                setShowModal(false);
+              }}
+              className="w-full"
+            >
+              <ButtonText>Submit and Close</ButtonText>
+            </Button>
+            <Button
+              variant="link"
+              size="sm"
+              onPress={() => {
+                setShowModal(false);
+              }}
+              className="gap-1"
+            >
+              <ButtonIcon as={ArrowLeftIcon} />
+              <ButtonText>Back to Settings</ButtonText>
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      {/* //future use models */}
+      {/* <Modal
+        isOpen={showModal2}
+        onClose={() => {
+          setShowModal2(false);
+        }}
+      >
+        <ModalBackdrop />
+        <ModalContent>
+          <ModalHeader className="flex-col items-start gap-0.5">
+            <Heading>Reset password</Heading>
+            <Text size="sm">
+              A verification code has been sent to you. Enter code below.
+            </Text>
+          </ModalHeader>
+          <ModalBody className="mb-4">
+            <Input>
+              <InputField placeholder="Enter verification code" />
+            </Input>
+          </ModalBody>
+          <ModalFooter className="flex-col items-start">
+            <Button
+              onPress={() => {
+                setShowModal3(true);
+              }}
+              className="w-full"
+            >
+              <ButtonText>Continue</ButtonText>
+            </Button>
+            <HStack space="xs" className="items-center">
+              <Text size="sm">Didn't receive the email?</Text>
+              <Link>
+                <LinkText
+                  size="xs"
+                  className="text-foreground/80 font-semibold"
+                >
+                  Click to resend
+                </LinkText>
+              </Link>
+            </HStack>
+            <HStack space="xs" className="items-center">
+              <Button
+                variant="link"
+                size="sm"
+                onPress={() => {
+                  setShowModal2(false);
+                }}
+                className="gap-1"
+              >
+                <ButtonIcon as={ArrowLeftIcon} />
+                <ButtonText>Back to login</ButtonText>
+              </Button>
+            </HStack>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Modal
+        isOpen={showModal3}
+        onClose={() => {
+          setShowModal3(false);
+        }}
+      >
+        <ModalBackdrop />
+        <ModalContent>
+          <ModalHeader className="flex-col items-start gap-0.5">
+            <Heading>Set new password</Heading>
+            <Text size="sm">
+              Almost done. Enter your new password and you are all set.
+            </Text>
+          </ModalHeader>
+          <ModalBody className="" contentContainerClassName="gap-3">
+            <Input>
+              <InputField placeholder="New password" />
+            </Input>
+            <Input>
+              <InputField placeholder="Confirm new password" />
+            </Input>
+          </ModalBody>
+          <ModalFooter className="flex-col items-start">
+            <Button
+              onPress={() => {
+                setShowModal(false);
+                setShowModal2(false);
+                setShowModal3(false);
+              }}
+              className="w-full"
+            >
+              <ButtonText>Submit</ButtonText>
+            </Button>
+            <Button
+              variant="link"
+              size="sm"
+              onPress={() => {
+                setShowModal3(false);
+              }}
+              className="gap-1"
+            >
+              <ButtonIcon as={ArrowLeftIcon} />
+              <ButtonText>Back to login</ButtonText>
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal> */}
+    </>
   );
 }

@@ -38,5 +38,15 @@ export default appSchema({
         { name: "category_value", type: "string" },
       ],
     }),
+    tableSchema({
+      name: "notes",
+      columns: [
+        { name: "note_id", type: "string" },
+        { name: "note_title", type: "string" },
+        { name: "note_body", type: "string" },
+        { name: "created_at", type: "number" },
+        { name: "updated_at", type: "number" },
+      ],
+    }),
   ],
 });

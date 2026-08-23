@@ -1,6 +1,5 @@
 import database from "@/src/db/database";
 
-database;
 const handledb = async () => {
   console.log("db data");
   const txns = database.get("transactions");
@@ -23,4 +22,13 @@ const hamdlermdb = async () => {
   });
 };
 
-export { hamdlermdb, handledb };
+const handlenotes = async () => {
+  console.log("db data");
+  const txns = database.get("notes");
+  const records = await txns.query().fetch();
+  records.forEach((record) => {
+    console.log(record._raw);
+  });
+};
+
+export { hamdlermdb, handledb, handlenotes };

@@ -28,7 +28,7 @@ function toDTO(record: Transaction) {
 const monthStart = dayjs().startOf("month").valueOf();
 const monthEnd = dayjs().endOf("month").valueOf();
 
-export class TransactionRepository {
+class TransactionRepository {
   observeRange(start: number, end: number) {
     return database
       .get<Transaction>("transactions")

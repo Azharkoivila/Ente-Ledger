@@ -3,6 +3,7 @@ import Category from "@/src/db/model/category";
 import Transaction from "@/src/db/model/transaction";
 import { TransactionData } from "@/src/types";
 import * as Crypto from "expo-crypto";
+
 export async function getTransaction(id: string) {
   return await database.get<Transaction>("transactions").find(id);
 }

@@ -52,7 +52,7 @@ export default {
       [
         "expo-font",
         {
-          fonts: ["./assets/fonts/Chilanka-Regular.ttf"],
+          fonts: ["./assets/fonts/malayalam/Chilanka-Regular.ttf"],
         },
       ],
       ["expo-secure-store"],

@@ -17,15 +17,20 @@ function formValidate({
 }
 
 function isEmpty(val: any) {
-  if (!val || val.toString().trim() === "") {
+  if (!val) {
     return true;
-  } else {
-    return false;
   }
+  const cleanStr = val.toString().trim();
+
+  if (cleanStr === "" || /^[\s]*<html>[\s]*<\/html>[\s]*$/.test(cleanStr)) {
+    return true;
+  }
+
+  return false;
 }
 
 function isAnyError(errorObj: isAnyErrorParam) {
   return Object.values(errorObj).some((val) => val);
 }
 
-export { formValidate, isAnyError };
+export { formValidate, isAnyError, isEmpty };

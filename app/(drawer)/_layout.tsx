@@ -83,6 +83,16 @@ export default function Layout() {
         }}
       />
       <Drawer.Screen
+        name="notesDrawer"
+        options={{
+          drawerLabel: "Notes",
+          title: "Notes",
+          drawerIcon: ({ color, size }) => (
+            <MaterialIcons name="library-books" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
         name="settingsDrawer"
         options={{
           drawerLabel: "Settings",
