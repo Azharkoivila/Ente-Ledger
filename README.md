@@ -475,31 +475,43 @@ Financial records are stored locally on the device using SQLite through Watermel
 ### Home
 
 <p align="center">
-  <img src="screenshots/home.jpg" width="250" alt="Ente Ledger Home">
+  <img src="./screenshots/home.jpg" width="250" alt="Ente Ledger Home">
 </p>
 
 ### Reports
 
 <p align="center">
-  <img src="screenshots/reports.jpg" width="250" alt="Ente Ledger Reports">
+  <img src="./screenshots/reports.jpg" width="250" alt="Ente Ledger Reports">
 </p>
 
 ### CategoryReports
 
 <p align="center">
-  <img src="screenshots/categoryReport.jpg" width="250" alt="Ente Ledger CategoryReport">
+  <img src="./screenshots/categoryReport.jpg" width="250" alt="Ente Ledger CategoryReport">
 </p>
 
 ### CategoryList
 
 <p align="center">
-  <img src="screenshots/CategoryList.jpg" width="250" alt="Ente Ledger CategoryList">
+  <img src="./screenshots/categoryList.jpg" width="250" alt="Ente Ledger CategoryList">
 </p>
 
 ### NoteEditor
 
 <p align="center">
-  <img src="screenshots/noteEditor.jpg" width="250" alt="Ente Ledger NoteEditor">
+  <img src="./screenshots/noteEditor.jpg" width="250" alt="Ente Ledger NoteEditor">
+</p>
+
+### Settings
+
+<p align="center">
+  <img src="./screenshots/settings.jpg" width="250" alt="Ente Ledger Settings">
+</p>
+
+### Drawer
+
+<p align="center">
+  <img src="./screenshots/drawer.jpg" width="250" alt="Ente Ledger Drawer">
 </p>
 # 🤝 Contributing
 
