@@ -174,7 +174,7 @@ export default function TransactionForm({
           <CustomTextArea
             placeholder="Enter your note"
             isInvalid={false}
-            value={String(state.note)}
+            value={String(state.note)} //   make it that
             onChange={(e) => updateForm(e)}
             isHelperArea
           />

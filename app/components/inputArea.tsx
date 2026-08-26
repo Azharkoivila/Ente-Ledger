@@ -27,7 +27,7 @@ export default function CustomTextArea({
         <TextareaInput
           placeholder={placeholder}
           onChangeText={(e) => {
-            onChange({ name: "notes", value: e }); //! look is not professional
+            onChange({ name: "note", value: e }); //! look is not professional
           }}
           value={value}
         />

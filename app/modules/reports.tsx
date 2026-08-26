@@ -8,14 +8,14 @@ import PrintContainer from "../components/printContainer";
 import SummeryCard from "../components/summeryCard";
 
 //two render detected
-// use seperate card for summery
+// use separate card for summery
 function ReportScreen({
   transactions,
   calender,
   start,
   end,
 }: ReportScreenProps) {
-  const [amount, Setamount] = useState<Summary>({
+  const [amount, SetAmount] = useState<Summary>({
     previousBalance: 0,
     totalIncome: 0,
     totalExpense: 0,
@@ -28,7 +28,7 @@ function ReportScreen({
       //! need explanations
       const summery = await getReportService({ start, end });
       if (!cancelled) {
-        Setamount(summery);
+        SetAmount(summery);
       }
     }
 

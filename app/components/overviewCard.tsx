@@ -2,14 +2,17 @@ import Spinner from "@/app/components/spinner";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 
-import { FListProps } from "@/src/types";
+import { FListProps, Summary } from "@/src/types";
 import getCalender from "../../src/utils/date/getCalender";
 import getReportService from "../../src/utils/db/services/reportService";
+import { defaultOptions } from "../constants";
 import CustomPieChart from "./pieChart";
 import TransactionContainer from "./transactionContainer";
 
 function OverviewCard({ transactions }: FListProps) {
-  const [summary, setSummary] = useState<undefined>();
+  console.log(transactions);
+
+  const [summary, setSummary] = useState<Summary>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,10 +22,12 @@ function OverviewCard({ transactions }: FListProps) {
       setLoading(true);
 
       try {
-        const result = await getReportService(getCalender("Monthly"));
+        const monthlySummary = await getReportService(
+          getCalender(defaultOptions.MONTHLY),
+        );
 
         if (!cancelled) {
-          setSummary(result);
+          setSummary(monthlySummary);
         }
       } catch (error) {
         console.log(error);
@@ -49,14 +54,14 @@ function OverviewCard({ transactions }: FListProps) {
           alignItems: "center",
         }}
       >
-        <Spinner size="large" />
+        <Spinner />
       </View>
     );
   }
 
   return (
     <View style={{ flex: 1 }}>
-      <CustomPieChart summery={summary} />
+      <CustomPieChart summary={summary!} />
 
       <TransactionContainer transactions={transactions} />
     </View>

@@ -2,6 +2,31 @@ import { Dispatch, ReactNode, SetStateAction } from "react";
 import { DateType } from "react-native-ui-datepicker";
 import Category from "../db/model/category";
 import Transaction from "../db/model/transaction";
+export interface TransactionData {
+  id: string;
+  category: "income" | "expense";
+  amount: number;
+  date: number;
+  transactionType: string;
+  note?: string;
+}
+
+export interface Summary {
+  previousBalance: number;
+  totalIncome: number;
+  totalExpense: number;
+  periodBalance: number;
+  closingBalance: number;
+}
+
+export interface PlainTransaction {
+  id: string;
+  amount: number;
+  category: string;
+  date: number;
+  transactionType: string;
+  note: string;
+}
 export interface CategoryFilter {
   name: string;
   value: string;
@@ -16,14 +41,14 @@ export interface CategoryReportsProps {
   setCategoryFilter: Dispatch<SetStateAction<CategoryFilter>>;
   setCalenderFilter: Dispatch<SetStateAction<CalendarFilter>>;
   category: string;
-  transactions: Transaction[];
+  transactions: readonly PlainTransaction[];
   categoryList: Category[];
   start: number;
   end: number;
 }
 
 export interface ReportScreenProps {
-  transactions: readonly TransactionData[];
+  transactions: readonly PlainTransaction[];
   calender: Dispatch<SetStateAction<CalendarFilter>>;
   start: number;
   end: number;
@@ -35,7 +60,7 @@ export interface CategoryFListProps {
 }
 
 export interface FListProps {
-  transactions: readonly TransactionData[];
+  transactions: readonly PlainTransaction[];
 }
 
 export interface TransactionError {
@@ -44,14 +69,6 @@ export interface TransactionError {
   date: boolean;
   transactionType: boolean;
   note?: boolean;
-}
-export interface TransactionData {
-  id?: string;
-  category: string;
-  amount: number;
-  date: number;
-  transactionType: string;
-  note?: string;
 }
 export interface isAnyErrorParam {
   amount: boolean;
@@ -137,19 +154,12 @@ export interface CustomTextAreaProps {
   onChange: (p: {}) => void; //! need attention
 }
 
-export interface Summary {
-  previousBalance: number;
-  totalIncome: number;
-  totalExpense: number;
-  periodBalance: number;
-  closingBalance: number;
-}
 export interface CustomPieChartProps {
-  summery: Summary;
+  summary: Summary;
 }
 
 export interface PrintContainerProps {
-  transactions: readonly TransactionData[];
+  transactions: readonly PlainTransaction[];
   summery: Summary;
 }
 

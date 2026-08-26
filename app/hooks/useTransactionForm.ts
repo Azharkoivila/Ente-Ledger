@@ -20,6 +20,8 @@ function updateDispatch(transaction: TransactionData, id: string) {
 }
 
 const formReducer = (state: TransactionData, action: FormAction) => {
+  console.log(state);
+
   switch (action.type) {
     case "UPDATE_FIELD":
       return {
@@ -32,7 +34,6 @@ const formReducer = (state: TransactionData, action: FormAction) => {
       return action.payload;
     case "UPDATE_FORM":
       return action.payload;
-
     default:
       return state;
   }
@@ -41,6 +42,8 @@ const formReducer = (state: TransactionData, action: FormAction) => {
 export default function useFormReducer() {
   const [state, dispatch] = useReducer(formReducer, initialState);
   function updateForm(e: any) {
+    console.log(e);
+
     if (!e?.name && !e?.value) {
       return;
     }

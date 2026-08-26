@@ -3,11 +3,11 @@ import LottieView from "lottie-react-native";
 import { Text, View } from "react-native";
 import { PieChart } from "react-native-gifted-charts";
 
-export default function CustomPieChart({ summery }: CustomPieChartProps) {
-  const total = summery?.totalIncome + summery?.totalExpense;
+export default function CustomPieChart({ summary }: CustomPieChartProps) {
+  const total = summary?.totalIncome + summary?.totalExpense;
 
-  const IncomePercentage = Math.round((summery?.totalIncome / total) * 100);
-  const ExpensePercentage = Math.round((summery?.totalExpense / total) * 100);
+  const IncomePercentage = Math.round((summary?.totalIncome / total) * 100);
+  const ExpensePercentage = Math.round((summary?.totalExpense / total) * 100);
 
   const renderLegend = (
     text: string,
@@ -124,14 +124,14 @@ export default function CustomPieChart({ summery }: CustomPieChartProps) {
               "Income",
               "#16A34A",
               "bg-success-50",
-              summery?.totalIncome,
+              summary?.totalIncome,
               IncomePercentage,
             )}
             {renderLegend(
               "Expense",
               "#DC2626",
               "bg-error-50",
-              summery?.totalExpense,
+              summary?.totalExpense,
               ExpensePercentage,
             )}
           </View>
