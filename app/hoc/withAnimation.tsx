@@ -1,8 +1,10 @@
 import { useFocusEffect } from "@react-navigation/native";
-import { useCallback, useRef } from "react";
+import { ComponentType, useCallback, useRef } from "react";
 import { Animated } from "react-native";
-export default function WithAnimation(Component) {
-  return function HOC(props) {
+export default function WithAnimation<P extends object>(
+  Component: ComponentType<P>,
+) {
+  return function HOC(props: P) {
     const translateX = useRef(new Animated.Value(30)).current;
     useFocusEffect(
       useCallback(() => {
@@ -14,7 +16,7 @@ export default function WithAnimation(Component) {
             useNativeDriver: true,
           }),
         ]).start();
-      }),
+      }, [translateX]),
     );
     return (
       <Animated.View

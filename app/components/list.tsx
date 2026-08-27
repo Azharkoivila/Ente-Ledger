@@ -7,7 +7,7 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { Text } from "@/components/ui/text";
-import { FListProps, TransactionData, TransactionRowProps } from "@/src/types";
+import { FListProps, PlainTransaction, TransactionRowProps } from "@/src/types";
 import Feather from "@expo/vector-icons/Feather";
 import { FlashList } from "@shopify/flash-list";
 import dayjs from "dayjs";
@@ -114,14 +114,14 @@ function FList({ transactions }: FListProps) {
   const handlePress = useCallback(
     (id: string) => {
       router.push({
-        pathname: "/modules/(transactionEditor)/[id]",
+        pathname: "./modules/(transactionEditor)/[id]",
         params: { id },
       });
     },
     [router],
   );
 
-  const handleLongPress = useCallback((item: TransactionData) => {
+  const handleLongPress = useCallback((item: PlainTransaction) => {
     Vibration.vibrate(15);
     setOpenItemId(item.id!);
   }, []);

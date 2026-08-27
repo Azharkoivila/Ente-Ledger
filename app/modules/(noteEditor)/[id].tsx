@@ -21,12 +21,17 @@ import type {
 } from "react-native-enriched-html";
 import { EnrichedTextInput } from "react-native-enriched-html";
 
+interface NoteTitleState {
+  name: string;
+  value: string;
+}
+
 export default function NoteEditor() {
   const { id } = useLocalSearchParams();
   const ref = useRef<EnrichedTextInputInstance>(null);
   const [state, setState] = useState<OnChangeStateEvent | null>(null);
-  const [noteTitle, SetNoteTitle] = useState();
-  const [notes, SetNotes] = useState();
+  const [noteTitle, SetNoteTitle] = useState<NoteTitleState>();
+  const [notes, SetNotes] = useState<String>();
   useFocusEffect(
     useCallback(() => {
       async function load() {
@@ -55,7 +60,7 @@ export default function NoteEditor() {
       console.log("EmpTY ALERT");
     } else if (id && id !== "new") {
       updateNote(id, { noteTitle: title, noteBody: notes });
-      SetNoteTitle("");
+      SetNoteTitle({ name: "noteTitle", value: "" });
       ref.current?.setValue("");
       router.back();
     } else {
@@ -65,7 +70,7 @@ export default function NoteEditor() {
         createdAt: Date.now(),
         updatedAt: Date.now(),
       });
-      SetNoteTitle("");
+      SetNoteTitle({ name: "noteTitle", value: "" });
       SetNotes("");
       ref.current?.setValue("");
       router.back();

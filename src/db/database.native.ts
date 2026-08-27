@@ -1,6 +1,7 @@
 // src/db/index.ts
 import { Database } from "@nozbe/watermelondb";
 import SQLiteAdapter from "@nozbe/watermelondb/adapters/sqlite";
+import Account from "./model/account";
 import Category from "./model/category";
 import Notes from "./model/notes";
 import Transaction from "./model/transaction";
@@ -14,7 +15,7 @@ const adapter = new SQLiteAdapter({
 
 const database = new Database({
   adapter,
-  modelClasses: [Transaction, Category, Notes],
+  modelClasses: [Transaction, Category, Notes, Account],
 });
 
 export default database;

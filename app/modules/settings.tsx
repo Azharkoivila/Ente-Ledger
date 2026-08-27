@@ -10,6 +10,11 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@/components/ui/modal";
+import {
+  getAccount,
+  setAccount,
+  updateAccount,
+} from "@/src/utils/db/services/accountService";
 import { flushTransactions } from "@/src/utils/db/services/transactionService";
 import storageService from "@/src/utils/storage/storageService";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -123,15 +128,24 @@ export default function SettingsScreen() {
   const [notifications, setNotifications] = useState(true);
   const [biometricLock, setBiometricLock] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-
-  //mmodel
+  const [userInput, setUserInput] = useState();
+  const [userId, setUserId] = useState();
+  //model
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [showModal3, setShowModal3] = useState(false);
   useEffect(() => {
     async function loadSettings() {
       try {
-        console.log("Effect", await storageService.getBiometric());
+        const [user] = await getAccount();
+        if (user.id) {
+          setUserId(user.id);
+          setUserInput(user.accountName);
+          console.log("hello", user.accountName);
+          console.log("id", user.id);
+        } else {
+          console.log("empty");
+        }
         const status = await storageService.getBiometric();
         setBiometricLock(Boolean(status));
       } catch (error) {
@@ -167,7 +181,13 @@ export default function SettingsScreen() {
       ],
     );
   };
-
+  const handleUser = () => {
+    if (userId) {
+      updateAccount(userInput, userId);
+    } else {
+      setAccount(userInput);
+    }
+  };
   return (
     <>
       <ScrollView
@@ -369,7 +389,8 @@ export default function SettingsScreen() {
           <ModalBody className="mb-4">
             <Input>
               <InputField
-                onChange={(e) => console.log(e.nativeEvent.text)}
+                value={userInput}
+                onChange={(e) => setUserInput(e.nativeEvent.text)}
                 placeholder="Enter your Name"
               />
             </Input>
@@ -377,8 +398,7 @@ export default function SettingsScreen() {
           <ModalFooter className="flex-col items-start">
             <Button
               onPress={() => {
-                console.log("username set action");
-
+                handleUser();
                 setShowModal(false);
               }}
               className="w-full"

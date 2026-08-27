@@ -1,13 +1,13 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import { DateType } from "react-native-ui-datepicker";
 import Category from "../db/model/category";
-import Transaction from "../db/model/transaction";
+export type TransactionType = "income" | "expense";
 export interface TransactionData {
-  id: string;
-  category: "income" | "expense";
+  id?: string;
+  category: string;
   amount: number;
   date: number;
-  transactionType: string;
+  transactionType: TransactionType;
   note?: string;
 }
 
@@ -174,9 +174,9 @@ export interface TransactionFormProps {
 }
 
 export interface TransactionRowProps {
-  item: TransactionData;
+  item: PlainTransaction;
   isPopoverOpen: boolean;
-  onPress: (item: Transaction) => void;
-  onLongPress: (item: Transaction) => void;
+  onPress: (item: string) => void;
+  onLongPress: (item: PlainTransaction) => void;
   onClosePopover: () => void;
 }

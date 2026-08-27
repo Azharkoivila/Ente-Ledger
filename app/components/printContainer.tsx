@@ -22,7 +22,6 @@ function PrintContainer({ transactions, summery }: PrintContainerProps) {
     <View
       style={{
         alignItems: "center",
-        justify: "center",
         marginTop: 10,
         marginBottom: 10,
       }}

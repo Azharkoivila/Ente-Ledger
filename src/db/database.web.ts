@@ -1,5 +1,6 @@
 import { Database } from "@nozbe/watermelondb";
 import LokiJSAdapter from "@nozbe/watermelondb/adapters/lokijs";
+import Account from "./model/account";
 import Category from "./model/category";
 import Transaction from "./model/transaction";
 import schema from "./schema/schema";
@@ -13,5 +14,5 @@ const adapter = new LokiJSAdapter({
 
 export default new Database({
   adapter,
-  modelClasses: [Transaction, Category], // Uses your exact same single model set
+  modelClasses: [Transaction, Category, Account], // Uses your exact same single model set
 });

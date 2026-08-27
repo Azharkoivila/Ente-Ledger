@@ -1,4 +1,3 @@
-import Transaction from "@/src/db/model/transaction";
 import { FormAction, TransactionData } from "@/src/types";
 import { useReducer } from "react";
 const initialState: TransactionData = {
@@ -57,7 +56,7 @@ export default function useFormReducer() {
     dispatch({ type: "RESET_FORM" }); //! memorize it
   }
 
-  function setForm(transaction: Transaction, id: string) {
+  function setForm(transaction: TransactionData, id: string) {
     dispatch({
       type: "UPDATE_FORM",
       payload: updateDispatch(transaction, id),
