@@ -19,8 +19,6 @@ function updateDispatch(transaction: TransactionData, id: string) {
 }
 
 const formReducer = (state: TransactionData, action: FormAction) => {
-  console.log(state);
-
   switch (action.type) {
     case "UPDATE_FIELD":
       return {

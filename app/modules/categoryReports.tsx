@@ -14,7 +14,9 @@ function CategoryReports({
   categoryList,
   start,
   end,
+  user,
 }: CategoryReportsProps) {
+  const [{ accountName, accountId }] = user;
   const [categoryReport, setCategoryReport] = useState<Summary>({
     previousBalance: 0,
     totalIncome: 0,
@@ -24,7 +26,6 @@ function CategoryReports({
   });
   useEffect(() => {
     let cancelled = false;
-
     async function loadSummary() {
       //! how i do types
       const summery = await getReportService({ start, end });
@@ -77,7 +78,12 @@ function CategoryReports({
           marginBottom: 10,
         }}
       >
-        <PrintContainer transactions={transactions} summery={categoryReport} />
+        <PrintContainer
+          transactions={transactions}
+          summery={categoryReport}
+          accountName={accountName}
+          accountId={accountId}
+        />
       </View>
       <View style={{ flex: 1 }}>
         <FList transactions={transactions}></FList>

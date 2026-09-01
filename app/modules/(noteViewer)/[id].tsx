@@ -1,5 +1,6 @@
 import { fetchNote } from "@/src/utils/db/services/notesService";
 import Feather from "@expo/vector-icons/Feather";
+import dayjs from "dayjs";
 import {
   Stack,
   useFocusEffect,
@@ -56,7 +57,10 @@ export default function NoteViewer() {
               {noteData.title}
             </Text>
 
-            <Text style={styles.updatedAt}>{noteData.updatedAt}</Text>
+            <Text style={styles.updatedAt}>
+              {" "}
+              {dayjs(noteData.updatedAt).format("DD/MM/YYYY")}
+            </Text>
           </View>
 
           <Pressable

@@ -2,6 +2,7 @@ import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import "@/global.css";
 // import { DatabaseProvider } from "@nozbe/watermelondb/react";
 import storageService from "@/src/utils/storage/storageService";
+import { DatabaseProvider } from "@nozbe/watermelondb/react";
 import { useFonts } from "expo-font";
 import * as LocalAuthentication from "expo-local-authentication";
 import { SplashScreen, Stack } from "expo-router";
@@ -130,11 +131,11 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <GluestackUIProvider mode="light">
-        {/* <DatabaseProvider database={database}> */}
-        <Stack>
-          <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
-        </Stack>
-        {/* </DatabaseProvider> */}
+        <DatabaseProvider database={database}>
+          <Stack>
+            <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+          </Stack>
+        </DatabaseProvider>
         <Toast topOffset={75} />
       </GluestackUIProvider>
     </SafeAreaProvider>

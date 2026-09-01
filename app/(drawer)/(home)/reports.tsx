@@ -1,4 +1,5 @@
 import { CalendarFilter, TimeStamp } from "@/src/types";
+import accountRepository from "@/src/utils/db/repository/accountRepository";
 import { withObservables } from "@nozbe/watermelondb/react";
 import { useState } from "react";
 import { View } from "react-native";
@@ -11,6 +12,7 @@ const ObservableReport = withObservables(
   ["start", "end"],
   ({ start, end }) => ({
     transactions: transactionRepository.observeRange(start, end),
+    user: accountRepository.observeUser(),
   }),
 )(ReportScreen);
 

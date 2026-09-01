@@ -1,5 +1,5 @@
 //! a bug detetected when minus value is frist Transaction
-export default function calculate(txn, summery) {
+export default function calculate(txn, summery, accountName, accountId) {
   let balance = 0;
   const ledgerHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -219,13 +219,13 @@ export default function calculate(txn, summery) {
       </div>
       <div class="brand-text">
         <div class="product">Ente Ledger</div>
-        <h1>AzharKoivila</h1>
+        <h1>${accountName}</h1>
       </div>
     </div>
     <div class="acct-meta">
-      <div class="row"><span class="k">Account</span><span>PN&#8209;0042&#8209;7719</span></div>
+      <div class="row"><span class="k">Account</span><span>${accountId}</span></div>
       <div class="row"><span class="k">Currency</span><span>INR</span></div>
-      <div class="row"><span class="k">Entries</span><span>06</span></div>
+      <div class="row"><span class="k">Entries</span><span>${txn.length}</span></div>
     </div>
   </header>
   <div class="table-wrap">
@@ -243,7 +243,7 @@ export default function calculate(txn, summery) {
         ${txn
           .map((transaction, no) => {
             if (transaction.transactionType === "income") {
-              balance = +transaction.amount;
+              balance += transaction.amount;
             } else {
               balance -= transaction.amount;
             }
@@ -277,7 +277,7 @@ export default function calculate(txn, summery) {
 
   <div class="footer">
     <span>&copy; 2026 Ente Ledger. All entries reconciled.</span>
-    <span>Developed by <a href="https://github.com/your-username" target="_blank" rel="noopener">Your Name</a></span>
+    <span>Developed by <a href="https://azharkoivila.tedomum.org/" target="_blank" rel="noopener">AzharKoivila</a></span>
   </div>
 
 </div>

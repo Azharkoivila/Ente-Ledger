@@ -10,8 +10,6 @@ import CustomPieChart from "./pieChart";
 import TransactionContainer from "./transactionContainer";
 
 function OverviewCard({ transactions }: FListProps) {
-  console.log(transactions);
-
   const [summary, setSummary] = useState<Summary>();
   const [loading, setLoading] = useState(true);
 

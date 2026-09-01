@@ -2,6 +2,7 @@ import database from "@/src/db/database";
 import Category from "@/src/db/model/category";
 import Transaction from "@/src/db/model/transaction";
 import { TransactionData } from "@/src/types";
+import { Q } from "@nozbe/watermelondb";
 import * as Crypto from "expo-crypto";
 
 export async function getTransaction(id: string) {
@@ -86,4 +87,12 @@ export const updateTransaction = async (id, state) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const getOneCategory = async () => {
+  const record = await database
+    .get<Category>("category")
+    .query(Q.take(1))
+    .fetch();
+  return record[0];
 };

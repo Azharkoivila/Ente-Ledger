@@ -1,6 +1,8 @@
 import { CategoryFilter, TimeStamp } from "@/src/types";
+import accountRepository from "@/src/utils/db/repository/accountRepository";
+import { getOneCategory } from "@/src/utils/db/services/transactionService";
 import { withObservables } from "@nozbe/watermelondb/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View } from "react-native";
 import getStamp from "../../../src/utils/date/getCalender";
 import CategoryRepository from "../../../src/utils/db/repository/categoryRepository";
@@ -16,17 +18,35 @@ const ObservableCategoryReport = withObservables(
       category,
     ),
     categoryList: CategoryRepository.observeCategory(),
+    user: accountRepository.observeUser(),
   }),
 )(CategoryReportScreen);
 
 function CategoryReports() {
   const [calenderFilter, setCalenderFilter] = useState<string>("Weekly");
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>({
-    name: "category",
-    value: "salary",
+    name: "",
+    value: "",
   });
   const timeStamp: TimeStamp = getStamp(calenderFilter);
+  useEffect(() => {
+    let cancel = false;
+    async function getCategory() {
+      const category = await getOneCategory();
+      if (!category) return;
+      if (!cancel) {
+        setCategoryFilter({
+          name: String(category.categoryName),
+          value: String(category.categoryValue),
+        });
+      }
+    }
+    getCategory();
 
+    return () => {
+      cancel = true;
+    };
+  }, []);
   return (
     <View
       className="px-3 pt-3"

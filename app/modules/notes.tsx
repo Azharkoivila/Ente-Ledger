@@ -21,6 +21,7 @@ import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { deleteNote } from "@/src/utils/db/services/notesService";
 import { FlashList } from "@shopify/flash-list";
+import dayjs from "dayjs";
 import { useRouter } from "expo-router";
 import LottieView from "lottie-react-native";
 import { memo, useCallback, useState } from "react";
@@ -38,7 +39,7 @@ const Notes = memo(function Notes({ item, onPress, onLongPress }) {
       <>
         <Card className="p-5 rounded-lg max-w-[360px] m-3">
           <Text className="text-sm font-normal text-foreground/70">
-            {item.createdAt}
+            {dayjs(item.createdAt).format("DD/MM/YYYY")}
           </Text>
           <VStack>
             <Heading size="md" className="mb-4">

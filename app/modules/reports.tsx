@@ -14,7 +14,9 @@ function ReportScreen({
   calender,
   start,
   end,
+  user,
 }: ReportScreenProps) {
+  const [{ accountName, accountId }] = user;
   const [amount, SetAmount] = useState<Summary>({
     previousBalance: 0,
     totalIncome: 0,
@@ -57,9 +59,14 @@ function ReportScreen({
         </ScrollView>
       </View>
       <View style={{ marginTop: 14 }}>
-        <SummeryCard summery={amount} />
+        <SummeryCard summary={amount} />
       </View>
-      <PrintContainer transactions={transactions} summery={amount} />
+      <PrintContainer
+        transactions={transactions}
+        summery={amount}
+        accountName={accountName}
+        accountId={accountId}
+      />
       <View style={{ flex: 1, marginTop: 4 }}>
         <FList transactions={transactions}></FList>
       </View>

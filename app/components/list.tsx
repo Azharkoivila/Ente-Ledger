@@ -114,7 +114,7 @@ function FList({ transactions }: FListProps) {
   const handlePress = useCallback(
     (id: string) => {
       router.push({
-        pathname: "./modules/(transactionEditor)/[id]",
+        pathname: "/modules/(transactionEditor)/[id]",
         params: { id },
       });
     },

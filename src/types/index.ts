@@ -37,6 +37,10 @@ export interface TimeStamp {
   end: number;
 }
 
+export interface AccountUser {
+  accountName: string;
+  accountId: string;
+}
 export interface CategoryReportsProps {
   setCategoryFilter: Dispatch<SetStateAction<CategoryFilter>>;
   setCalenderFilter: Dispatch<SetStateAction<CalendarFilter>>;
@@ -45,6 +49,7 @@ export interface CategoryReportsProps {
   categoryList: Category[];
   start: number;
   end: number;
+  user: AccountUser[];
 }
 
 export interface ReportScreenProps {
@@ -52,6 +57,7 @@ export interface ReportScreenProps {
   calender: Dispatch<SetStateAction<CalendarFilter>>;
   start: number;
   end: number;
+  user: AccountUser[];
 }
 
 export interface CategoryFListProps {
@@ -161,6 +167,8 @@ export interface CustomPieChartProps {
 export interface PrintContainerProps {
   transactions: readonly PlainTransaction[];
   summery: Summary;
+  accountName: string;
+  accountId: string;
 }
 
 export interface CustomRadioButtonProps {

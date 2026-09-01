@@ -1,7 +1,7 @@
 import { CustomPieChartProps } from "@/src/types";
 import { Text, View } from "react-native";
-function SummeryCard({ summery }: CustomPieChartProps) {
-  const isPositiveBalance = (summery.periodBalance || 0) >= 0;
+function SummeryCard({ summary }: CustomPieChartProps) {
+  const isPositiveBalance = (summary.periodBalance || 0) >= 0;
 
   return (
     <View
@@ -35,7 +35,7 @@ function SummeryCard({ summery }: CustomPieChartProps) {
             color: "#111827",
           }}
         >
-          ₹{summery.previousBalance}
+          ₹{summary.previousBalance}
         </Text>
       </View>
 
@@ -75,7 +75,7 @@ function SummeryCard({ summery }: CustomPieChartProps) {
               color: "#16A34A",
             }}
           >
-            ₹{summery.totalIncome}
+            ₹{summary.totalIncome}
           </Text>
         </View>
         <View
@@ -100,7 +100,7 @@ function SummeryCard({ summery }: CustomPieChartProps) {
               color: "#DC2626",
             }}
           >
-            ₹{summery.totalExpense}
+            ₹{summary.totalExpense}
           </Text>
         </View>
         <View
@@ -125,7 +125,7 @@ function SummeryCard({ summery }: CustomPieChartProps) {
               color: isPositiveBalance ? "#0F766E" : "#DC2626",
             }}
           >
-            ₹{summery.periodBalance}
+            ₹{summary.periodBalance}
           </Text>
         </View>
       </View>
