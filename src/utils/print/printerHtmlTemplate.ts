@@ -219,11 +219,11 @@ export default function calculate(txn, summery, accountName, accountId) {
       </div>
       <div class="brand-text">
         <div class="product">Ente Ledger</div>
-        <h1>${accountName}</h1>
+        <h1>${accountName || "Guest User"}</h1>
       </div>
     </div>
     <div class="acct-meta">
-      <div class="row"><span class="k">Account</span><span>${accountId}</span></div>
+      <div class="row"><span class="k">AccountID</span><span>${accountId || "Nill"}</span></div>
       <div class="row"><span class="k">Currency</span><span>INR</span></div>
       <div class="row"><span class="k">Entries</span><span>${txn.length}</span></div>
     </div>

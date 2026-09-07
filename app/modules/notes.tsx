@@ -1,14 +1,12 @@
-import {
-  Avatar,
-  AvatarFallbackText,
-  AvatarImage,
-} from "@/components/ui/avatar";
+import { Avatar } from "@/components/ui/avatar";
 import { Box } from "@/components/ui/box";
 import { Button, ButtonText } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Heading } from "@/components/ui/heading";
+import { Icon } from "@/components/ui/icon";
+import { User } from "lucide-react-native";
 
-import { Icon, TrashIcon } from "@/components/ui/icon";
+import { TrashIcon } from "@/components/ui/icon";
 import {
   Modal,
   ModalBackdrop,
@@ -27,7 +25,7 @@ import LottieView from "lottie-react-native";
 import { memo, useCallback, useState } from "react";
 import { TouchableOpacity, Vibration, View } from "react-native";
 
-const Notes = memo(function Notes({ item, onPress, onLongPress }) {
+const Notes = memo(function Notes({ item, onPress, onLongPress, user }) {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -48,18 +46,12 @@ const Notes = memo(function Notes({ item, onPress, onLongPress }) {
             <Text size="sm">{item.noteBody}</Text>
           </VStack>
           <Box className="flex-row">
-            <Avatar className="mr-3">
-              <AvatarFallbackText>RR</AvatarFallbackText>
-              <AvatarImage
-                source={{
-                  uri: "https://gluestack.github.io/public-blog-video-assets/john.png",
-                }}
-                alt="image"
-              />
+            <Avatar className="mr-3 bg-indigo-600">
+              <Icon as={User} size="lg" className="stroke-white" />
             </Avatar>
             <VStack>
               <Heading size="sm" className="mb-1">
-                John Smith
+                {user}
               </Heading>
               <Text size="sm">Ente Ledger User</Text>
             </VStack>
@@ -70,7 +62,8 @@ const Notes = memo(function Notes({ item, onPress, onLongPress }) {
   );
 });
 
-export default function NoteList({ notes }) {
+export default function NoteList({ notes, user }) {
+  const [currentUser] = user;
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [selectedNoteId, setSelectedNoteId] = useState(null);
@@ -121,6 +114,7 @@ export default function NoteList({ notes }) {
               NewNoteButton
               onPress={handlePress}
               onLongPress={handleLongPress}
+              user={currentUser?.accountName || "GuestUser"}
             />
           );
         }}

@@ -16,7 +16,9 @@ function ReportScreen({
   end,
   user,
 }: ReportScreenProps) {
-  const [{ accountName, accountId }] = user;
+  console.log(user);
+
+  const [{ accountName, accountId } = {}] = user || [{}];
   const [amount, SetAmount] = useState<Summary>({
     previousBalance: 0,
     totalIncome: 0,

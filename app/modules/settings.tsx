@@ -11,7 +11,6 @@ import {
   ModalHeader,
 } from "@/components/ui/modal";
 import {
-  getAccount,
   setAccount,
   updateAccount,
 } from "@/src/utils/db/services/accountService";
@@ -121,14 +120,16 @@ function Row({ icon, tint, label, sublabel, right, onPress, isLast, danger }) {
   );
 }
 
-export default function SettingsScreen() {
+export default function SettingsScreen({ user }) {
+  const [currentUser] = user || [];
+
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
   const [notifications, setNotifications] = useState(true);
   const [biometricLock, setBiometricLock] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const [userInput, setUserInput] = useState();
+  const [userInput, setUserInput] = useState(currentUser?.accountName || "");
   const [userId, setUserId] = useState();
   //model
   const [showModal, setShowModal] = useState(false);
@@ -137,12 +138,11 @@ export default function SettingsScreen() {
   useEffect(() => {
     async function loadSettings() {
       try {
-        const [user] = await getAccount();
-        if (user.id) {
-          setUserId(user.id);
-          setUserInput(user.accountName);
-          console.log("hello", user.accountName);
-          console.log("id", user.id);
+        if (currentUser?.accountId) {
+          setUserId(currentUser.accountId);
+          setUserInput(currentUser.accountName);
+          console.log("hello", currentUser.accountName);
+          console.log("id", currentUser.accountId);
         } else {
           console.log("empty");
         }
