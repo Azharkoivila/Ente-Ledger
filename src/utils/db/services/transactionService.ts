@@ -15,7 +15,7 @@ export async function createTransaction(entry: TransactionData) {
       await database.get<Transaction>("transactions").create((record) => {
         record.transactionId = Crypto.randomUUID();
         record.category = entry.category;
-        record.amount = +entry.amount; //! need more accurate data store
+        record.amount = Number(entry.amount);
         record.date = entry.date;
         record.transactionType = entry.transactionType;
         record.note = String(entry.note);
@@ -73,12 +73,14 @@ export const flushTransactions = async () => {
 };
 
 export const updateTransaction = async (id, state) => {
+  console.log("from dbfn ", state);
+
   try {
     await database.write(async () => {
       const post = await database.get<Transaction>("transactions").find(id);
       await post.update((record) => {
         record.category = state.category;
-        record.amount = state.amount;
+        record.amount = Number(state.amount);
         record.date = state.date;
         record.transactionType = state.transactionType;
         record.note = state.note;
