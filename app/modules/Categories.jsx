@@ -66,7 +66,7 @@ function Categories() {
         <CustomInput
           usedFor="category"
           onChange={handleChange}
-          value={input.value}
+          value={input?.value?.toUpperCase()}
         ></CustomInput>
         <Button size="lg" className="mt-3 bg-[#0F766E]" onPress={handleSubmit}>
           <ButtonText>
