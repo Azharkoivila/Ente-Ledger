@@ -188,3 +188,16 @@ export interface TransactionRowProps {
   onLongPress: (item: PlainTransaction) => void;
   onClosePopover: () => void;
 }
+
+export interface UpdateCategoryPARAM {
+  name: "category";
+  value: any;
+  mode: "edit";
+  id: string;
+}
+
+export interface AddCategoryPARAM {
+  name: "category";
+  value: any;
+  mode: "add";
+}

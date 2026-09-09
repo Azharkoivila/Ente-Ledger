@@ -1,7 +1,11 @@
 import database from "@/src/db/database";
 import Category from "@/src/db/model/category";
 import Transaction from "@/src/db/model/transaction";
-import { TransactionData } from "@/src/types";
+import {
+  AddCategoryPARAM,
+  TransactionData,
+  UpdateCategoryPARAM,
+} from "@/src/types";
 import { Q } from "@nozbe/watermelondb";
 import * as Crypto from "expo-crypto";
 
@@ -37,7 +41,7 @@ export const handleDeleteCategory = async (id: string) => {
   });
 };
 
-export const updateCategory = async (input) => {
+export const updateCategory = async (input: UpdateCategoryPARAM) => {
   await database.write(async () => {
     const post = await database.get<Category>("category").find(input.id);
     await post.update((record) => {
@@ -47,7 +51,7 @@ export const updateCategory = async (input) => {
   });
 };
 
-export const addCategory = async (input) => {
+export const addCategory = async (input: AddCategoryPARAM) => {
   await database.write(async () => {
     const newTxn = await database
       .get<Category>("category")
@@ -72,7 +76,7 @@ export const flushTransactions = async () => {
   });
 };
 
-export const updateTransaction = async (id, state) => {
+export const updateTransaction = async (id: string, state: TransactionData) => {
   console.log("from dbfn ", state);
 
   try {
@@ -83,7 +87,7 @@ export const updateTransaction = async (id, state) => {
         record.amount = Number(state.amount);
         record.date = state.date;
         record.transactionType = state.transactionType;
-        record.note = state.note;
+        record.note = String(state.note);
       });
     });
   } catch (error) {
