@@ -16,7 +16,7 @@ function CategoryReports({
   end,
   user,
 }: CategoryReportsProps) {
-  const [{ accountName, accountId }] = user;
+  const [{ accountName, accountId } = {}] = user || [{}];
   const [categoryReport, setCategoryReport] = useState<Summary>({
     previousBalance: 0,
     totalIncome: 0,
@@ -52,7 +52,7 @@ function CategoryReports({
         <CustomDropDown
           values={categoryList}
           onChange={setCategoryFilter}
-          selectedValue={category}
+          selectedValue={category.toUpperCase()}
         />
       </View>
       <View>
