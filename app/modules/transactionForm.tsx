@@ -114,7 +114,7 @@ export default function TransactionForm({
         >
           <CustomDropDown
             values={categoryList}
-            selectedValue={state.category}
+            selectedValue={state.category.toUpperCase()}
             onChange={(e) => updateForm(e)}
           />
         </CustomFormController>
