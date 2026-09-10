@@ -102,3 +102,9 @@ export const getOneCategory = async () => {
     .fetch();
   return record[0];
 };
+export const deleteTransaction = async (id: string) => {
+  await database.write(async () => {
+    const record = await database.get("transactions").find(id);
+    await record.destroyPermanently();
+  });
+};

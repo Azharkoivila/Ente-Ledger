@@ -1,4 +1,6 @@
+import { Box } from "@/components/ui/box";
 import { Button, ButtonText } from "@/components/ui/button";
+import { Icon, TrashIcon } from "@/components/ui/icon";
 import {
   Popover,
   PopoverArrow,
@@ -8,6 +10,7 @@ import {
 } from "@/components/ui/popover";
 import { Text } from "@/components/ui/text";
 import { FListProps, PlainTransaction, TransactionRowProps } from "@/src/types";
+import { deleteTransaction } from "@/src/utils/db/services/transactionService";
 import Feather from "@expo/vector-icons/Feather";
 import { FlashList } from "@shopify/flash-list";
 import dayjs from "dayjs";
@@ -82,8 +85,18 @@ const TransactionRow = memo(function TransactionRow({
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
         >
+          <View className="justify-center items-center">
+            <Box className="w-[56px] h-[56px] rounded-full bg-red-600 items-center justify-center">
+              <Icon
+                as={TrashIcon}
+                className="stroke-destructive"
+                size="xl"
+                color="white"
+              />
+            </Box>
+          </View>
           <View>
-            <Text style={{ color: "black" }}>
+            <Text style={{ color: "black" }} className="text-center mt-3">
               Do You Want To Delete This Transaction ?
             </Text>
           </View>
@@ -94,10 +107,16 @@ const TransactionRow = memo(function TransactionRow({
               justifyContent: "space-between",
             }}
           >
-            <Button onPress={onClosePopover}>
-              <ButtonText className="bg-[]">NO</ButtonText>
+            <Button className="bg-[#0F766E]" onPress={onClosePopover}>
+              <ButtonText>NO</ButtonText>
             </Button>
-            <Button>
+            <Button
+              className="bg-red-600"
+              onPress={() => {
+                deleteTransaction(item.id);
+                onClosePopover();
+              }}
+            >
               <ButtonText>YES</ButtonText>
             </Button>
           </View>
