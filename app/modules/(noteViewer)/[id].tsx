@@ -1,3 +1,4 @@
+import { Button, ButtonText } from "@/components/ui/button";
 import { fetchNote } from "@/src/utils/db/services/notesService";
 import Feather from "@expo/vector-icons/Feather";
 import dayjs from "dayjs";
@@ -8,7 +9,7 @@ import {
   useRouter,
 } from "expo-router";
 import React, { useCallback, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { EnrichedText } from "react-native-enriched-html";
 
 export default function NoteViewer() {
@@ -63,17 +64,13 @@ export default function NoteViewer() {
             </Text>
           </View>
 
-          <Pressable
+          <Button
+            className="bg-[#0F766E] active:!bg-[#168042]"
             onPress={handleEdit}
-            style={({ pressed }) => [
-              styles.editButton,
-              pressed && styles.editButtonPressed,
-            ]}
-            android_ripple={{ color: "#E5E7EB" }}
           >
-            <Feather name="edit-2" size={18} color="#374151" />
-            <Text style={styles.editText}>Edit</Text>
-          </Pressable>
+            <Feather name="edit-2" size={18} color="#f5f7fa" />
+            <ButtonText>Edit</ButtonText>
+          </Button>
         </View>
 
         {/* Divider */}

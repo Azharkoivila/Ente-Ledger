@@ -3,17 +3,6 @@ import Transaction from "@/src/db/model/transaction";
 import { Q } from "@nozbe/watermelondb";
 import { map } from "@nozbe/watermelondb/utils/rx";
 import dayjs from "dayjs";
-
-// export default async function getWeek({ start, end }) {
-//   console.log(start);
-//   console.log(end);
-
-//   const transactions = await database
-//     .get("transactions")
-//     .query(Q.where("date", Q.gte(start)), Q.where("date", Q.lt(end)))
-//     .fetch();
-//   console.log(transactions);
-// }
 function toDTO(record: Transaction) {
   return {
     id: record.id,

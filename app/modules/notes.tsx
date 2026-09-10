@@ -46,7 +46,7 @@ const Notes = memo(function Notes({ item, onPress, onLongPress, user }) {
             <Text size="sm">{item.noteBody}</Text>
           </VStack>
           <Box className="flex-row">
-            <Avatar className="mr-3 bg-indigo-600">
+            <Avatar className="mr-3 bg-[#0F766E]">
               <Icon as={User} size="lg" className="stroke-white" />
             </Avatar>
             <VStack>
@@ -128,12 +128,12 @@ export default function NoteList({ notes, user }) {
         <ModalBackdrop />
         <ModalContent className="max-w-[305px] items-center">
           <ModalHeader>
-            <Box className="w-[56px] h-[56px] rounded-full bg-white items-center justify-center">
+            <Box className="w-[56px] h-[56px] rounded-full bg-red-600 items-center justify-center">
               <Icon
                 as={TrashIcon}
                 className="stroke-destructive"
                 size="xl"
-                color="red"
+                color="white"
               />
             </Box>
           </ModalHeader>
@@ -154,9 +154,9 @@ export default function NoteList({ notes, user }) {
               onPress={() => {
                 setShowModal(false);
               }}
-              className="flex-grow"
+              className="flex-grow bg-[#0F766E]"
             >
-              <ButtonText>Cancel</ButtonText>
+              <ButtonText className=" text-white">Cancel</ButtonText>
             </Button>
             <Button
               onPress={(e) => {
@@ -164,7 +164,7 @@ export default function NoteList({ notes, user }) {
                 deleteNote(selectedNoteId);
               }}
               size="sm"
-              className="flex-grow"
+              className="flex-grow bg-red-600"
             >
               <ButtonText>Delete</ButtonText>
             </Button>
@@ -193,6 +193,7 @@ function NewNoteButton() {
       }}
     >
       <Button
+        className="bg-[#0F766E]"
         onPress={handlePress}
         style={{
           width: 64,

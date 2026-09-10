@@ -77,7 +77,7 @@ export default function CustomDatePicker({
               <ButtonText>Cancel</ButtonText>
             </Button>
             <Button
-              className="bg=[#0F766E]"
+              className="bg-[#0F766E]"
               onPress={() => {
                 setShowModal(false);
               }}

@@ -231,7 +231,10 @@ export default function NoteEditor() {
             </ScrollView>
           </View>
         </View>
-        <Button onPress={handleSaveNotes}>
+        <Button
+          className="bg-[#0F766E] active:!bg-[#168042]"
+          onPress={handleSaveNotes}
+        >
           <ButtonText>Save</ButtonText>
         </Button>
       </View>

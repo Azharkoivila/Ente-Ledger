@@ -118,6 +118,7 @@ export default function FilterButtons({
                 <ButtonText>Cancel</ButtonText>
               </Button>
               <Button
+                className="bg-[#0F766E]"
                 onPress={() => {
                   setRange({
                     startDate: dayjs(),
