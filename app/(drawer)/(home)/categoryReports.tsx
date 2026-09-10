@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { View } from "react-native";
 import getStamp from "../../../src/utils/date/getCalender";
 import CategoryRepository from "../../../src/utils/db/repository/categoryRepository";
-import transactionRepository from "../../../src/utils/db/repository/txnRepository";
+import transactionRepository from "../../../src/utils/db/repository/transactionRepository";
 import WithAnimation from "../../hoc/withAnimation";
 import CategoryReportScreen from "../../modules/categoryReports";
 const ObservableCategoryReport = withObservables(

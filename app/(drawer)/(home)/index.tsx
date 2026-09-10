@@ -2,7 +2,7 @@ import { withObservables } from "@nozbe/watermelondb/react";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCallback } from "react";
 import { View } from "react-native";
-import transactionRepository from "../../../src/utils/db/repository/txnRepository";
+import transactionRepository from "../../../src/utils/db/repository/transactionRepository";
 import OverviewCard from "../../components/overviewCard";
 import WithAnimation from "../../hoc/withAnimation";
 const ObservableOverview = withObservables([], () => ({

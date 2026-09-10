@@ -4,7 +4,7 @@ import { withObservables } from "@nozbe/watermelondb/react";
 import { useState } from "react";
 import { View } from "react-native";
 import getStamp from "../../../src/utils/date/getCalender";
-import transactionRepository from "../../../src/utils/db/repository/txnRepository";
+import transactionRepository from "../../../src/utils/db/repository/transactionRepository";
 import WithAnimation from "../../hoc/withAnimation";
 import ReportScreen from "../../modules/reports";
 
